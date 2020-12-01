@@ -1,0 +1,35 @@
+module multi_dec_ctr #(
+    DIGITS = 2 : DIGITS >= 2  // number of digits
+  ) (
+    input clk,                // clock
+    input rst,                // reset
+    
+    input dec,                // decrement counter
+    
+    input set_sixty,          // set 60
+    
+    output digits[DIGITS][4]  // digit values
+  ) {
+ 
+  .clk(clk), .rst(rst) {
+    decimal_counter dctr [DIGITS]; // digit counters
+  }
+ 
+  always {
+    
+    if (set_sixty) {     // set to 60
+      dctr.set[1] = 6;
+      dctr.set[0] = 0;
+    }  
+    else{
+      dctr.set[1] = 10;
+      dctr.set[0] = 10;
+    }
+    
+    dctr.dec[0] = dec;   // decrement the first digit
+    digits = dctr.value; // output the values
+    
+    // if the previous digit underflows, decrement the next
+    dctr.dec[1+:DIGITS-1] = dctr.uvf[0+:DIGITS-1];
+  }
+}

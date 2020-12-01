@@ -1,0 +1,3949 @@
+module final_state_machine (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input rbdata[16],
+    input st,
+    
+    input confirm_button,
+    input reset_button,
+    
+    input button1,
+    input button2,
+    input button3,
+    input button4,
+    
+    input plus_button,
+    input sub_button,
+    input mul_button,
+    
+    output alufn[6],
+    
+    output asel[2],
+    output bsel[2],
+    output wdsel[2],
+    
+    output we,
+    output ra[4],
+    output rb[4],
+    output rc[4],
+    
+    output numsel[2],
+    output randsel,
+    
+    output timer_decrease,
+    output timer_set_sixty
+  ) {
+  .clk(clk) {
+    .rst(rst) {
+      fsm state = {START, START_TIMER,
+                   RANDSEL, FIRST_INTEGER, SECOND_INTEGER, THIRD_INTEGER, FOURTH_INTEGER,
+                   RESET_POINTS, RESET_FIRST_INPUT, RESET_SECOND_INPUT, RESET_THIRD_INPUT, RESET_FOURTH_INPUT, RESET_FIRST_OP, RESET_SECOND_OP, RESET_THIRD_OP,
+                   IDLE,
+                   DECREASE_TIMER, CHECK_TIMER, BRANCH_TIMER, CHECK_RESULT_TIMER, BRANCH_RESULT_TIMER, DECREASE_RESULT_TIMER, RESET_RESULT_REG, GAMEOVER,
+                   INP1A, BRANCHINP1A, INP2A, BRANCHINP2A, INP3A, BRANCHINP3A, INP4A, BRANCHINP4A,
+                   DECREASE_TIMER1A, CHECK_TIMER1A, BRANCH_TIMER1A, CHECK_RESULT_TIMER1A, BRANCH_RESULT_TIMER1A, DECREASE_RESULT_TIMER1A, RESET_RESULT_REG1A,
+                   DECREASE_TIMER2A, CHECK_TIMER2A, BRANCH_TIMER2A, CHECK_RESULT_TIMER2A, BRANCH_RESULT_TIMER2A, DECREASE_RESULT_TIMER2A, RESET_RESULT_REG2A,
+                   DECREASE_TIMER3A, CHECK_TIMER3A, BRANCH_TIMER3A, CHECK_RESULT_TIMER3A, BRANCH_RESULT_TIMER3A, DECREASE_RESULT_TIMER3A, RESET_RESULT_REG3A,
+                   DECREASE_TIMER4A, CHECK_TIMER4A, BRANCH_TIMER4A, CHECK_RESULT_TIMER4A, BRANCH_RESULT_TIMER4A, DECREASE_RESULT_TIMER4A, RESET_RESULT_REG4A,
+                   INP1ADD, INP1SUB, INP1MUL, INP2ADD, INP2SUB, INP2MUL, INP3ADD, INP3SUB, INP3MUL, INP4ADD, INP4SUB, INP4MUL,
+                   INP1B, INP2B, INP3B, INP4B,
+                   DECREASE_TIMER1B, CHECK_TIMER1B, BRANCH_TIMER1B, CHECK_RESULT_TIMER1B, BRANCH_RESULT_TIMER1B, DECREASE_RESULT_TIMER1B, RESET_RESULT_REG1B,
+                   DECREASE_TIMER2B, CHECK_TIMER2B, BRANCH_TIMER2B, CHECK_RESULT_TIMER2B, BRANCH_RESULT_TIMER2B, DECREASE_RESULT_TIMER2B, RESET_RESULT_REG2B,
+                   DECREASE_TIMER3B, CHECK_TIMER3B, BRANCH_TIMER3B, CHECK_RESULT_TIMER3B, BRANCH_RESULT_TIMER3B, DECREASE_RESULT_TIMER3B, RESET_RESULT_REG3B,
+                   DECREASE_TIMER4B, CHECK_TIMER4B, BRANCH_TIMER4B, CHECK_RESULT_TIMER4B, BRANCH_RESULT_TIMER4B, DECREASE_RESULT_TIMER4B, RESET_RESULT_REG4B,
+                   INP12A, INP13A, INP14A, INP21A, INP23A, INP24A, INP31A, INP32A, INP34A, INP41A, INP42A, INP43A,
+                   BRANCHINP12A, BRANCHINP13A, BRANCHINP14A, BRANCHINP23A, BRANCHINP24A, BRANCHINP34A,
+                   DECREASE_TIMER12A, CHECK_TIMER12A, BRANCH_TIMER12A, CHECK_RESULT_TIMER12A, BRANCH_RESULT_TIMER12A, DECREASE_RESULT_TIMER12A, RESET_RESULT_REG12A,
+                   DECREASE_TIMER13A, CHECK_TIMER13A, BRANCH_TIMER13A, CHECK_RESULT_TIMER13A, BRANCH_RESULT_TIMER13A, DECREASE_RESULT_TIMER13A, RESET_RESULT_REG13A,
+                   DECREASE_TIMER14A, CHECK_TIMER14A, BRANCH_TIMER14A, CHECK_RESULT_TIMER14A, BRANCH_RESULT_TIMER14A, DECREASE_RESULT_TIMER14A, RESET_RESULT_REG14A,
+                   DECREASE_TIMER23A, CHECK_TIMER23A, BRANCH_TIMER23A, CHECK_RESULT_TIMER23A, BRANCH_RESULT_TIMER23A, DECREASE_RESULT_TIMER23A, RESET_RESULT_REG23A,
+                   DECREASE_TIMER24A, CHECK_TIMER24A, BRANCH_TIMER24A, CHECK_RESULT_TIMER24A, BRANCH_RESULT_TIMER24A, DECREASE_RESULT_TIMER24A, RESET_RESULT_REG24A,
+                   DECREASE_TIMER34A, CHECK_TIMER34A, BRANCH_TIMER34A, CHECK_RESULT_TIMER34A, BRANCH_RESULT_TIMER34A, DECREASE_RESULT_TIMER34A, RESET_RESULT_REG34A,
+                   INP12ADD, INP12SUB, INP12MUL, INP13ADD, INP13SUB, INP13MUL, INP14ADD, INP14SUB, INP14MUL,
+                   INP23ADD, INP23SUB, INP23MUL, INP24ADD, INP24SUB, INP24MUL,
+                   INP34ADD, INP34SUB, INP34MUL,
+                   INP12B, INP13B, INP14B, INP23B, INP24B, INP34B,
+                   DECREASE_TIMER12B, CHECK_TIMER12B, BRANCH_TIMER12B, CHECK_RESULT_TIMER12B, BRANCH_RESULT_TIMER12B, DECREASE_RESULT_TIMER12B, RESET_RESULT_REG12B,
+                   DECREASE_TIMER13B, CHECK_TIMER13B, BRANCH_TIMER13B, CHECK_RESULT_TIMER13B, BRANCH_RESULT_TIMER13B, DECREASE_RESULT_TIMER13B, RESET_RESULT_REG13B,
+                   DECREASE_TIMER14B, CHECK_TIMER14B, BRANCH_TIMER14B, CHECK_RESULT_TIMER14B, BRANCH_RESULT_TIMER14B, DECREASE_RESULT_TIMER14B, RESET_RESULT_REG14B,
+                   DECREASE_TIMER23B, CHECK_TIMER23B, BRANCH_TIMER23B, CHECK_RESULT_TIMER23B, BRANCH_RESULT_TIMER23B, DECREASE_RESULT_TIMER23B, RESET_RESULT_REG23B,
+                   DECREASE_TIMER24B, CHECK_TIMER24B, BRANCH_TIMER24B, CHECK_RESULT_TIMER24B, BRANCH_RESULT_TIMER24B, DECREASE_RESULT_TIMER24B, RESET_RESULT_REG24B,
+                   DECREASE_TIMER34B, CHECK_TIMER34B, BRANCH_TIMER34B, CHECK_RESULT_TIMER34B, BRANCH_RESULT_TIMER34B, DECREASE_RESULT_TIMER34B, RESET_RESULT_REG34B,
+                   INP123A, INP124A, INP132A, INP134A, INP142A, INP143A, INP231A, INP234A, INP241A, INP243A, INP341A, INP342A,
+                   BRANCHINP123A, BRANCHINP124A, BRANCHINP134A, BRANCHINP234A,
+                   DECREASE_TIMER123A, CHECK_TIMER123A, BRANCH_TIMER123A, CHECK_RESULT_TIMER123A, BRANCH_RESULT_TIMER123A, DECREASE_RESULT_TIMER123A, RESET_RESULT_REG123A,
+                   DECREASE_TIMER124A, CHECK_TIMER124A, BRANCH_TIMER124A, CHECK_RESULT_TIMER124A, BRANCH_RESULT_TIMER124A, DECREASE_RESULT_TIMER124A, RESET_RESULT_REG124A,
+                   DECREASE_TIMER134A, CHECK_TIMER134A, BRANCH_TIMER134A, CHECK_RESULT_TIMER134A, BRANCH_RESULT_TIMER134A, DECREASE_RESULT_TIMER134A, RESET_RESULT_REG134A,
+                   DECREASE_TIMER234A, CHECK_TIMER234A, BRANCH_TIMER234A, CHECK_RESULT_TIMER234A, BRANCH_RESULT_TIMER234A, DECREASE_RESULT_TIMER234A, RESET_RESULT_REG234A,
+                   INP123ADD, INP123SUB, INP123MUL, INP124ADD, INP124SUB, INP124MUL, INP134ADD, INP134SUB, INP134MUL, INP234ADD, INP234SUB, INP234MUL,
+                   INP123B, INP124B, INP134B, INP234B,
+                   DECREASE_TIMER123B, CHECK_TIMER123B, BRANCH_TIMER123B, CHECK_RESULT_TIMER123B, BRANCH_RESULT_TIMER123B, DECREASE_RESULT_TIMER123B, RESET_RESULT_REG123B,
+                   DECREASE_TIMER124B, CHECK_TIMER124B, BRANCH_TIMER124B, CHECK_RESULT_TIMER124B, BRANCH_RESULT_TIMER124B, DECREASE_RESULT_TIMER124B, RESET_RESULT_REG124B,
+                   DECREASE_TIMER134B, CHECK_TIMER134B, BRANCH_TIMER134B, CHECK_RESULT_TIMER134B, BRANCH_RESULT_TIMER134B, DECREASE_RESULT_TIMER134B, RESET_RESULT_REG134B,
+                   DECREASE_TIMER234B, CHECK_TIMER234B, BRANCH_TIMER234B, CHECK_RESULT_TIMER234B, BRANCH_RESULT_TIMER234B, DECREASE_RESULT_TIMER234B, RESET_RESULT_REG234B,
+                   INPXXX1, INPXXX2, INPXXX3, INPXXX4, CONFIRM,
+                   DECREASE_TIMER_CONFIRM, CHECK_TIMER_CONFIRM, BRANCH_TIMER_CONFIRM, CHECK_RESULT_TIMER_CONFIRM, BRANCH_RESULT_TIMER_CONFIRM, DECREASE_RESULT_TIMER_CONFIRM, RESET_RESULT_REG_CONFIRM,
+                   OP1X, BRANCHOP1X, OP1AB, OP12X, BRANCHOP12X, OP12BC, OP123X, BRANCHOP123X, OP123CD,
+                   OP123, BRANCHOP123, OP123CD1, OP123CD2,
+                   OP13X, BRANCHOP13X, OP13CD, OP132, BRANCHOP132, OP132BC1, OP132BC2,
+                   OP12, BRANCHOP12, OP12BC1, OP12BC2,
+                   OP2X, BRANCHOP2X, OP2BC, OP23X, BRANCHOP23X, OP23CD, OP231, BRANCHOP231, OP231AC1, OP231AC2,
+                   OP21, BRANCHOP21, OP21AC1, OP21AC2,
+                   OP3X, BRANCHOP3X, OP3CD, OP31, BRANCHOP31, OP31AB1, OP31AB2,
+                   OP1, BRANCHOP1, OP1AB1, OP1AB2,
+                   CHECK_C24, BRANCH_CHECK_C24, RED_LED, RED_LED_TIMER, GREEN_LED, GREEN_LED_TIMER, ADD_POINT};
+    }
+  }
+  
+
+  always {
+    alufn = b000000;
+    we = b0;
+    asel = b00;
+    bsel = b00;
+    wdsel = b00;
+    ra = b0000;
+    rb = b0000;
+    rc = b0000;
+    
+    randsel = b0;
+    numsel = b00;
+    
+    timer_decrease = 0;
+    timer_set_sixty = 0;
+    
+    if (rst){
+        state.d = state.START;
+    }
+    else{
+    
+      case(state.q){
+        state.START:
+          we = 0;
+          if (confirm_button) {          
+            state.d = state.START_TIMER;
+          }
+        
+        state.START_TIMER:
+          we = 1;
+          rb = 4d6;
+          rc = 4d6; 
+          wdsel = b10;      // Set 60 seconds
+        
+          if (rbdata == 60) {
+            timer_set_sixty = 1;
+            state.d = state.RESET_POINTS;
+          }
+          
+        state.RESET_POINTS:
+          we = 1;
+          rc = 4d5;
+          wdsel = b01;
+          state.d = state.RANDSEL;
+        
+        state.RANDSEL:
+          we = 0;
+          randsel = b1;
+          state.d = state.FIRST_INTEGER;
+          
+        state.FIRST_INTEGER:
+          we = 1;
+          rc = 4d0;
+          wdsel = b11;
+          numsel = b00;
+          randsel = b0;
+          state.d = state.SECOND_INTEGER;
+          
+        state.SECOND_INTEGER:
+          we = 1;
+          rc = 4d1;
+          wdsel = b11;
+          numsel = b01;
+          randsel = b0;
+          state.d = state.THIRD_INTEGER;
+          
+        state.THIRD_INTEGER:
+          we = 1;
+          rc = 4d2;
+          wdsel = b11;
+          numsel = b10;
+          randsel = b0;
+          state.d = state.FOURTH_INTEGER;
+          
+        state.FOURTH_INTEGER:
+          we = 1;
+          rc = 4d3;
+          wdsel = b11;
+          numsel = b11;
+          randsel = b0;
+          state.d = state.RESET_FIRST_INPUT;
+          
+        state.RESET_FIRST_INPUT:
+          we = 1;
+          rc = 4d7;
+          wdsel = b01;
+          state.d = state.RESET_SECOND_INPUT;
+          
+        state.RESET_SECOND_INPUT:
+          we = 1;
+          rc = 4d8;
+          wdsel = b01;
+          state.d = state.RESET_THIRD_INPUT;
+          
+        state.RESET_THIRD_INPUT:
+          we = 1;
+          rc = 4d9;
+          wdsel = b01;
+          state.d = state.RESET_FOURTH_INPUT;
+          
+        state.RESET_FOURTH_INPUT:
+          we = 1;
+          rc = 4d10;
+          wdsel = b01;
+          state.d = state.RESET_FIRST_OP;
+          
+        state.RESET_FIRST_OP:
+          we = 1;
+          rc = 4d11;
+          wdsel = b01;
+          state.d = state.RESET_SECOND_OP;
+          
+        state.RESET_SECOND_OP:
+          we = 1;
+          rc = 4d12;
+          wdsel = b01;
+          state.d = state.RESET_THIRD_OP;
+          
+        state.RESET_THIRD_OP:
+          we = 1;
+          rc = 4d13;
+          wdsel = b01;
+          state.d = state.IDLE;
+        
+        state.IDLE:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER;
+          }
+          if (button1) {
+            state.d = state.INP1A;
+          }
+          if (button2) {
+            state.d = state.INP2A;
+          }
+          if (button3) {
+            state.d = state.INP3A;
+          }
+          if (button4) {
+             state.d = state.INP4A;
+          }
+        
+        
+        state.DECREASE_TIMER:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER;
+        
+        state.CHECK_TIMER:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER;
+        
+        state.BRANCH_TIMER:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+        
+        state.CHECK_RESULT_TIMER:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER;
+        
+        state.BRANCH_RESULT_TIMER:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG;
+          }
+        
+        state.RESET_RESULT_REG:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.IDLE;
+        
+        state.DECREASE_RESULT_TIMER:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.IDLE;
+        
+        state.GAMEOVER:
+          we = 0;
+          if (confirm_button) {
+            state.d = state.START_TIMER;
+          }
+        
+        state.INP1A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d7;
+          wdsel = b00;
+          state.d = state.BRANCHINP1A;
+          
+        state.BRANCHINP1A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER1A;
+          }
+          if (plus_button) {
+            state.d = state.INP1ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP1SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP1MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+            
+        state.DECREASE_TIMER1A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER1A;
+
+        state.CHECK_TIMER1A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER1A;
+
+        state.BRANCH_TIMER1A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER1A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER1A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER1A;
+
+        state.BRANCH_RESULT_TIMER1A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER1A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG1A;
+          }
+
+        state.RESET_RESULT_REG1A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP1A;
+
+        state.DECREASE_RESULT_TIMER1A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP1A;
+          
+        state.INP1ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP1B;
+          
+        state.INP1SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP1B;
+          
+        state.INP1MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP1B;
+          
+        state.INP1B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER1B;
+          }
+          if (button2) {
+            state.d = state.INP12A;
+          }
+          if (button3) {
+            state.d = state.INP13A;
+          }
+          if (button4) {
+            state.d = state.INP14A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER1B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER1B;
+        
+        state.CHECK_TIMER1B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER1B;
+
+        state.BRANCH_TIMER1B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER1B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER1B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER1B;
+
+        state.BRANCH_RESULT_TIMER1B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER1B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG1B;
+          }
+
+        state.RESET_RESULT_REG1B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP1B;
+
+        state.DECREASE_RESULT_TIMER1B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP1B;
+          
+        state.INP2A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d7;
+          wdsel = b00;
+          state.d = state.BRANCHINP2A;
+          
+        state.BRANCHINP2A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER2A;
+          }
+          if (plus_button) {
+            state.d = state.INP2ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP2SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP2MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+            
+        state.DECREASE_TIMER2A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER2A;
+
+        state.CHECK_TIMER2A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER2A;
+
+        state.BRANCH_TIMER2A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER2A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER2A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER2A;
+
+        state.BRANCH_RESULT_TIMER2A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER2A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG2A;
+          }
+
+        state.RESET_RESULT_REG2A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP2A;
+
+        state.DECREASE_RESULT_TIMER2A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP2A;
+          
+        state.INP2ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP2B;
+          
+        state.INP2SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP2B;
+          
+        state.INP2MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP2B;
+          
+        state.INP2B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER2B;
+          }
+          if (button1) {
+            state.d = state.INP21A;
+          }
+          if (button3) {
+            state.d = state.INP23A;
+          }
+          if (button4) {
+            state.d = state.INP24A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER2B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER2B;
+
+        state.CHECK_TIMER2B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER2B;
+
+        state.BRANCH_TIMER2B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER2B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER2B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER2B;
+
+        state.BRANCH_RESULT_TIMER2B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER2B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG2B;
+          }
+
+        state.RESET_RESULT_REG2B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP2B;
+
+        state.DECREASE_RESULT_TIMER2B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP2B;
+          
+        state.INP3A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d7;
+          wdsel = b00;
+          state.d = state.BRANCHINP3A;
+          
+        state.BRANCHINP3A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER3A;
+          }
+          if (plus_button) {
+            state.d = state.INP3ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP3SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP3MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER3A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER3A;
+
+        state.CHECK_TIMER3A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER3A;
+
+        state.BRANCH_TIMER3A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER3A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER3A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER3A;
+
+        state.BRANCH_RESULT_TIMER3A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER3A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG3A;
+          }
+
+        state.RESET_RESULT_REG3A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP3A;
+
+        state.DECREASE_RESULT_TIMER3A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP3A;
+          
+        state.INP3ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP3B;
+          
+        state.INP3SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP3B;
+          
+        state.INP3MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP3B;
+          
+        state.INP3B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER3B;
+          }
+          if (button1) {
+            state.d = state.INP31A;
+          }
+          if (button2) {
+            state.d = state.INP32A;
+          }
+          if (button4) {
+            state.d = state.INP34A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER3B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER3B;
+
+        state.CHECK_TIMER3B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER3B;
+
+        state.BRANCH_TIMER3B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER3B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER3B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER3B;
+
+        state.BRANCH_RESULT_TIMER3B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER3B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG3B;
+          }
+
+        state.RESET_RESULT_REG3B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP3B;
+
+        state.DECREASE_RESULT_TIMER3B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP3B;
+          
+        state.INP4A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d7;
+          wdsel = b00;
+          state.d = state.BRANCHINP4A;
+          
+        state.BRANCHINP4A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER4A;
+          }
+          if (plus_button) {
+            state.d = state.INP4ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP4SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP4MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+            
+        state.DECREASE_TIMER4A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER4A;
+
+        state.CHECK_TIMER4A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER4A;
+
+        state.BRANCH_TIMER4A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER4A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER4A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER4A;
+
+        state.BRANCH_RESULT_TIMER4A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER4A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG4A;
+          }
+
+        state.RESET_RESULT_REG4A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP4A;
+
+        state.DECREASE_RESULT_TIMER4A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP4A;
+          
+       state.INP4ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP4B;
+          
+        state.INP4SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP4B;
+          
+        state.INP4MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d11;
+          wdsel = b00;
+          state.d = state.INP4B;
+          
+        state.INP4B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER4B;
+          }
+          if (button1) {
+            state.d = state.INP41A;
+          }
+          if (button2) {
+            state.d = state.INP42A;
+          }
+          if (button3) {
+            state.d = state.INP43A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER4B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER4B;
+
+        state.CHECK_TIMER4B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER4B;
+
+        state.BRANCH_TIMER4B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER4B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER4B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER4B;
+
+        state.BRANCH_RESULT_TIMER4B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER4B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG4B;
+          }
+
+        state.RESET_RESULT_REG4B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP4B;
+
+        state.DECREASE_RESULT_TIMER4B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP4B;
+          
+        state.INP12A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP12A;
+          
+        state.BRANCHINP12A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER12A;
+          }
+          if (plus_button) {
+            state.d = state.INP12ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP12SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP12MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER12A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER12A;
+
+        state.CHECK_TIMER12A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER12A;
+
+        state.BRANCH_TIMER12A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER12A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER12A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER12A;
+
+        state.BRANCH_RESULT_TIMER12A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER12A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG12A;
+          }
+
+        state.RESET_RESULT_REG12A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP12A;
+        
+        state.DECREASE_RESULT_TIMER12A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP12A;
+        
+        state.INP12ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP12B;
+          
+        state.INP12SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP12B;
+          
+        state.INP12MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP12B;
+          
+        state.INP12B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER12B;
+          }
+          if (button3) {
+            state.d = state.INP123A;
+          }
+          if (button4) {
+            state.d = state.INP124A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER12B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER12B;
+
+        state.CHECK_TIMER12B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER12B;
+
+        state.BRANCH_TIMER12B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER12B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER12B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER12B;
+
+        state.BRANCH_RESULT_TIMER12B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER12B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG12B;
+          }
+
+        state.RESET_RESULT_REG12B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP12B;
+        
+        state.DECREASE_RESULT_TIMER12B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP12B;
+        
+        state.INP13A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP13A;
+        
+        state.BRANCHINP13A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER13A;
+          }
+          if (plus_button) {
+            state.d = state.INP13ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP13SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP13MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER13A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER13A;
+
+        state.CHECK_TIMER13A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER13A;
+
+        state.BRANCH_TIMER13A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER13A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER13A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER13A;
+
+        state.BRANCH_RESULT_TIMER13A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER13A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG13A;
+          }
+
+        state.RESET_RESULT_REG13A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP13A;
+        
+        state.DECREASE_RESULT_TIMER13A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP13A;
+        
+        state.INP13ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP13B;
+          
+        state.INP13SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP13B;
+          
+        state.INP13MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP13B;
+          
+        state.INP13B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER13B;
+          }
+          if (button2) {
+            state.d = state.INP132A;
+          }
+          if (button4) {
+            state.d = state.INP134A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER13B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER13B;
+
+        state.CHECK_TIMER13B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER13B;
+
+        state.BRANCH_TIMER13B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER13B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER13B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER13B;
+
+        state.BRANCH_RESULT_TIMER13B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER13B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG13B;
+          }
+
+        state.RESET_RESULT_REG13B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP13B;
+        
+        state.DECREASE_RESULT_TIMER13B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP13B;
+        
+        state.INP14A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP14A;
+        
+        state.BRANCHINP14A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER14A;
+          }
+          if (plus_button) {
+            state.d = state.INP14ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP14SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP14MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER14A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER14A;
+
+        state.CHECK_TIMER14A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER14A;
+
+        state.BRANCH_TIMER14A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER14A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER14A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER14A;
+
+        state.BRANCH_RESULT_TIMER14A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER14A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG14A;
+          }
+
+        state.RESET_RESULT_REG14A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP14A;
+
+        state.DECREASE_RESULT_TIMER14A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP14A;
+        
+        state.INP14ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP14B;
+          
+        state.INP14SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP14B;
+          
+        state.INP14MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP14B;
+          
+        state.INP14B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER14B;
+          }
+          if (button2) {
+            state.d = state.INP142A;
+          }
+          if (button3) {
+            state.d = state.INP143A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER14B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER14B;
+
+        state.CHECK_TIMER14B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER14B;
+
+        state.BRANCH_TIMER14B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER14B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER14B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER14B;
+
+        state.BRANCH_RESULT_TIMER14B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER14B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG14B;
+          }
+
+        state.RESET_RESULT_REG14B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP14B;
+        
+        state.DECREASE_RESULT_TIMER14B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP14B;
+        
+        state.INP21A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP12A;
+          
+        state.INP23A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP23A;
+          
+        state.BRANCHINP23A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER23A;
+          }
+          if (plus_button) {
+            state.d = state.INP23ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP23SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP23MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER23A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER23A;
+
+        state.CHECK_TIMER23A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER23A;
+
+        state.BRANCH_TIMER23A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER23A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER23A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER23A;
+
+        state.BRANCH_RESULT_TIMER23A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER23A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG23A;
+          }
+
+        state.RESET_RESULT_REG23A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP23A;
+
+        state.DECREASE_RESULT_TIMER23A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP23A;
+          
+        state.INP23ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP23B;
+          
+        state.INP23SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP23B;
+          
+        state.INP23MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP23B;
+          
+        state.INP23B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER23B;
+          }
+          if (button1) {
+            state.d = state.INP231A;
+          }
+          if (button4) {
+            state.d = state.INP234A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER23B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER23B;
+
+        state.CHECK_TIMER23B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER23B;
+
+        state.BRANCH_TIMER23B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER23B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER23B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER23B;
+
+        state.BRANCH_RESULT_TIMER23B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER23B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG23B;
+          }
+
+        state.RESET_RESULT_REG23B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP23B;
+        
+        state.DECREASE_RESULT_TIMER23B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP23B;
+        
+        state.INP24A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP24A;
+        
+        state.BRANCHINP24A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER24A;
+          }
+          if (plus_button) {
+            state.d = state.INP24ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP24SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP24MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER24A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER24A;
+
+        state.CHECK_TIMER24A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER24A;
+
+        state.BRANCH_TIMER24A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER24A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER24A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER24A;
+
+        state.BRANCH_RESULT_TIMER24A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER24A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG24A;
+          }
+
+        state.RESET_RESULT_REG24A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP24A;
+        
+        state.DECREASE_RESULT_TIMER24A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP24A;
+        
+        state.INP24ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP24B;
+          
+        state.INP24SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP24B;
+          
+        state.INP24MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP24B;
+          
+        state.INP24B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER24B;
+          }
+          if (button1) {
+            state.d = state.INP241A;
+          }
+          if (button3) {
+            state.d = state.INP243A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER24B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER24B;
+        
+        state.CHECK_TIMER24B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER24B;
+
+        state.BRANCH_TIMER24B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER24B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER24B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER24B;
+
+        state.BRANCH_RESULT_TIMER24B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER24B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG24B;
+          }
+
+        state.RESET_RESULT_REG24B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP24B;
+
+        state.DECREASE_RESULT_TIMER24B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP24B;
+          
+        state.INP31A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP13A;
+          
+        state.INP32A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP23A;
+          
+        state.INP34A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP34A;
+          
+        state.BRANCHINP34A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER34A;
+          }
+          if (plus_button) {
+            state.d = state.INP34ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP34SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP34MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER34A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER34A;
+
+        state.CHECK_TIMER34A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER34A;
+
+        state.BRANCH_TIMER34A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER34A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER34A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER34A;
+
+        state.BRANCH_RESULT_TIMER34A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER34A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG34A;
+          }
+
+        state.RESET_RESULT_REG34A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP34A;
+        
+        state.DECREASE_RESULT_TIMER34A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP34A;
+        
+        state.INP34ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP34B;
+          
+        state.INP34SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP34B;
+          
+        state.INP34MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d12;
+          wdsel = b00;
+          state.d = state.INP34B;
+          
+        state.INP34B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER34B;
+          }
+          if (button1) {
+            state.d = state.INP341A;
+          }
+          if (button2) {
+            state.d = state.INP342A;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER34B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER34B;
+
+        state.CHECK_TIMER34B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER34B;
+
+        state.BRANCH_TIMER34B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER34B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER34B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER34B;
+
+        state.BRANCH_RESULT_TIMER34B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER34B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG34B;
+          }
+
+        state.RESET_RESULT_REG34B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP34B;
+        
+        state.DECREASE_RESULT_TIMER34B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP34B;
+        
+        state.INP41A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP14A;
+        
+        state.INP42A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP24A;
+        
+        state.INP43A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.BRANCHINP34A;
+        
+        state.INP123A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP123A;
+        
+        state.BRANCHINP123A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER123A;
+          }
+          if (plus_button) {
+            state.d = state.INP123ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP123SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP123MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER123A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER123A;
+
+        state.CHECK_TIMER123A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER123A;
+
+        state.BRANCH_TIMER123A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER123A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER123A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER123A;
+
+        state.BRANCH_RESULT_TIMER123A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER123A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG123A;
+          }
+
+        state.RESET_RESULT_REG123A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP123A;
+        
+        state.DECREASE_RESULT_TIMER123A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP123A;
+        
+        state.INP123ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP123B;
+          
+        state.INP123SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP123B;
+          
+        state.INP123MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP123B;
+          
+        state.INP123B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER123B;
+          }
+          if (button4) {
+            state.d = state.INPXXX4;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER123B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER123B;
+
+        state.CHECK_TIMER123B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER123B;
+
+        state.BRANCH_TIMER123B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER123B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER123B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER123B;
+
+        state.BRANCH_RESULT_TIMER123B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER123B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG123B;
+          }
+
+        state.RESET_RESULT_REG123B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP123B;
+        
+        state.DECREASE_RESULT_TIMER123B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP123B;
+        
+        state.INP124A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP124A;
+        
+        state.BRANCHINP124A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER124A;
+          }
+          if (plus_button) {
+            state.d = state.INP124ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP124SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP124MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER124A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER124A;
+
+        state.CHECK_TIMER124A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER124A;
+
+        state.BRANCH_TIMER124A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER124A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER124A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER124A;
+
+        state.BRANCH_RESULT_TIMER124A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER124A;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG124A;
+          }
+
+        state.RESET_RESULT_REG124A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP124A;
+        
+        state.DECREASE_RESULT_TIMER124A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP124A;
+        
+        state.INP124ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP124B;
+          
+        state.INP124SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP124B;
+          
+        state.INP124MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP124B;
+          
+        state.INP124B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER124B;
+          }
+          if (button3) {
+            state.d = state.INPXXX3;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER124B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER124B;
+
+        state.CHECK_TIMER124B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER124B;
+
+        state.BRANCH_TIMER124B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER124B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER124B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER124B;
+
+        state.BRANCH_RESULT_TIMER124B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER124B;
+          }
+          else {
+            state.d = state.RESET_RESULT_REG124B;
+          }
+
+        state.RESET_RESULT_REG124B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP124B;
+        
+        state.DECREASE_RESULT_TIMER124B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP124B;
+        
+        state.INP132A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP123A;
+        
+        state.INP134A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP134A;
+        
+        state.BRANCHINP134A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER134A;
+          }
+          if (plus_button) {
+            state.d = state.INP134ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP134SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP134MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER134A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER134A;
+
+        state.CHECK_TIMER134A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER134A;
+
+        state.BRANCH_TIMER134A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER134A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER134A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER134A;
+
+        state.BRANCH_RESULT_TIMER134A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER134A;       
+          }
+          else {
+            state.d = state.RESET_RESULT_REG134A;
+          }
+
+        state.RESET_RESULT_REG134A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP134A;
+        
+        state.DECREASE_RESULT_TIMER134A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP134A;
+        
+        state.INP134ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP134B;
+          
+        state.INP134SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP134B;
+          
+        state.INP134MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP134B;
+          
+        state.INP134B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER134B;
+          }
+          if (button2) {
+            state.d = state.INPXXX2;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER134B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER134B;
+
+        state.CHECK_TIMER134B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER134B;
+
+        state.BRANCH_TIMER134B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER134B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER134B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER134B;
+
+        state.BRANCH_RESULT_TIMER134B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER134B;       
+          }
+          else {
+            state.d = state.RESET_RESULT_REG134B;
+          }
+
+        state.RESET_RESULT_REG134B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP134B;
+
+        state.DECREASE_RESULT_TIMER134B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b01;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP134B;
+        
+        state.INP142A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP124A;
+        
+        state.INP143A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP134A;
+        
+        state.INP231A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;`
+          ra = 4d0;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP123A;
+        
+        state.INP234A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP234A;
+        
+        state.BRANCHINP234A:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER234A;
+          }
+          if (plus_button) {
+            state.d = state.INP234ADD;
+          }
+          if (sub_button) {
+            state.d = state.INP234SUB;
+          }
+          if (mul_button)_ {
+            state.d = state.INP234MUL;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+        
+        state.DECREASE_TIMER234A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER234A;
+
+        state.CHECK_TIMER234A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER234A;
+
+        state.BRANCH_TIMER234A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER234A;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER234A:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER234A;
+
+        state.BRANCH_RESULT_TIMER234A:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER234A;       
+          }
+          else {
+            state.d = state.RESET_RESULT_REG234A;
+          }
+
+        state.RESET_RESULT_REG234A:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.BRANCHINP234A;
+
+        state.DECREASE_RESULT_TIMER234A:
+          alufn = b000001;
+          asel = b00;
+          bsel = b01;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.BRANCHINP234A;
+        
+        state.INP234ADD:
+          alufn = b000000;
+          asel = b01;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP234B;
+          
+        state.INP234SUB:
+          alufn = b000000;
+          asel = b10;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP234B;
+          
+        state.INP234MUL:
+          alufn = b000000;
+          asel = b11;
+          bsel = b10;
+          we = 1;
+          rc = 4d13;
+          wdsel = b00;
+          state.d = state.INP234B;
+          
+        state.INP234B:
+          we = 0;
+          if (st) {
+            state.d = state.DECREASE_TIMER234B;
+          }
+          if (button1) {
+            state.d = state.INPXXX1;
+          }
+          if (reset_button) {
+            state.d = state.RESET_FIRST_INPUT;
+          }
+          
+        state.DECREASE_TIMER234B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER234B;
+
+        state.CHECK_TIMER234B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER234B;
+
+        state.BRANCH_TIMER234B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER234B;
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER234B:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER234B;
+
+        state.BRANCH_RESULT_TIMER234B:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER234B;       
+          }
+          else {
+            state.d = state.RESET_RESULT_REG234B;
+          }
+
+        state.RESET_RESULT_REG234B:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.INP234B;
+        
+        state.DECREASE_RESULT_TIMER234B:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.INP234B;
+        
+        state.INP241A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP124A;
+        
+        state.INP243A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP234A;
+        
+        state.INP341A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP134A;
+        
+        state.INP342A:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.BRANCHINP234A;
+        
+        state.INPXXX1:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d0;
+          rc = 4d10;
+          wdsel = b00;
+          state.d = state.CONFIRM;
+        
+        state.INPXXX2:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d1;
+          rc = 4d10;
+          wdsel = b00;
+          state.d = state.CONFIRM;
+        
+        state.INPXXX3:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d2;
+          rc = 4d10;
+          wdsel = b00;
+          state.d = state.CONFIRM;
+        
+        state.INPXXX4:
+          alufn = b000000;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d3;
+          rc = 4d10;
+          wdsel = b00;
+          state.d = state.CONFIRM;
+        
+        state.CONFIRM:
+           we = 0;
+           if (st) {
+             state.d = state.DECREASE_TIMER_CONFIRM;
+           }
+           if (confirm_button) {
+             state.d = state.OP1X;
+           }
+           if (reset_button) {
+             state.d = state.RESET_FIRST_INPUT;
+           }
+        
+        state.DECREASE_TIMER_CONFIRM:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d6;
+          rc = 4d6;
+          wdsel = b00;
+          timer_decrease = 1;
+          state.d = state.CHECK_TIMER_CONFIRM;
+
+        state.CHECK_TIMER_CONFIRM:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d6;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_TIMER_CONFIRM;
+
+        state.BRANCH_TIMER_CONFIRM:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.CHECK_RESULT_TIMER_CONFIRM;      
+          }
+          else {
+            state.d = state.GAMEOVER;
+          }
+
+        state.CHECK_RESULT_TIMER_CONFIRM:
+          alufn = b110011;
+          asel = b00;
+          bsel = b10;
+          we = 1;
+          ra = 4d14;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_RESULT_TIMER_CONFIRM;       
+
+        state.BRANCH_RESULT_TIMER_CONFIRM:
+          rb = 4d15;
+          if (~rbdata[0]) {
+            state.d = state.DECREASE_RESULT_TIMER_CONFIRM;   
+          }
+          else {
+            state.d = state.RESET_RESULT_REG_CONFIRM;        
+          }
+
+        state.RESET_RESULT_REG_CONFIRM:
+          we = 1;
+          rc = 4d4;
+          wdsel = b01;
+          state.d = state.CONFIRM;
+        
+        state.DECREASE_RESULT_TIMER_CONFIRM:
+          alufn = b000001;
+          asel = b00;
+          bsel = b11;
+          we = 1;
+          ra = 4d14;
+          rc = 4d14;
+          wdsel = b00;
+          state.d = state.CONFIRM;
+        
+        state.OP1X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d11;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP1X;
+        
+        state.BRANCHOP1X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP1AB;
+          }
+          else {
+            state.d = state.OP2X;
+          }
+        
+        state.OP1AB:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d8;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.OP12X;
+        
+        state.OP12X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d12;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP12X;
+        
+        state.BRANCHOP12X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP12BC;
+          }
+          else {
+            state.d = state.OP13X;
+          }
+        
+        state.OP12BC:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP123X;
+        
+        state.OP123X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d13;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP123X;
+        
+        state.BRANCHOP123X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP123CD;
+          }
+          else {
+            state.d = state.OP123;
+          }
+        
+        state.OP123CD:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP123:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d13;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP123;
+        
+        state.BRANCHOP123:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP123CD1;
+          }
+          else {
+            state.d = state.OP123CD2;
+          }
+        
+        state.OP123CD1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP123CD2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP13X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d13;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP13X;
+        
+        state.BRANCHOP13X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP13CD;
+          }
+          else {
+            state.d = state.OP12;
+          }
+        
+        state.OP13CD:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP132;
+        
+        state.OP132:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d12;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP132;
+        
+        state.BRANCHOP132:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP132BC1;
+          }
+          else {
+            state.d = state.OP132BC2;
+          }
+        
+        state.OP132BC1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP132BC2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP12:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d12;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP12;
+        
+        state.BRANCHOP12:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP12BC1;
+          }
+          else {
+            state.d = state.OP12BC2;
+          }
+        
+        state.OP12BC1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP123;
+        
+        state.OP12BC2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP123;
+        
+        state.OP2X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d12;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP2X;
+        
+        state.BRANCHOP2X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP2BC;
+          }
+          else {
+            state.d = state.OP3X;
+          }
+        
+        state.OP2BC:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d8;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP23X;
+        
+        state.OP23X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d13;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP23X;
+        
+        state.BRANCHOP23X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP23CD;
+          }
+          else {
+            state.d = state.OP21;
+          }
+        
+        state.OP23CD:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP231;
+        
+        state.OP231:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d11;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP231;
+        
+        state.BRANCHOP231:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP231AC1;
+          }
+          else {
+            state.d = state.OP231AC2;
+          }
+        
+        state.OP231AC1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP231AC2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.CHECK_C24;
+        
+        state.OP21:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d11;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP21;
+        
+        state.BRANCHOP21:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP21AC1;
+          }
+          else {
+            state.d = state.OP21AC2;
+          }
+        
+        state.OP21AC1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP123;
+        
+        state.OP21AC2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d9;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP123;
+        
+        state.OP3X:
+          alufn = 110011;
+          asel = b11;
+          bsel = b00;
+          we = b1;
+          rb = 4d13;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP3X;
+        
+        state.BRANCHOP3X:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP3CD;
+          }
+          else {
+            state.d = state.OP1;
+          }
+        
+        state.OP3CD:
+          alufn = 000010;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d9;
+          rb = 4d10;
+          rc = 4d9;
+          wdsel = b00;
+          state.d = state.OP31;
+        
+        state.OP31:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d11;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP31;
+        
+        state.BRANCHOP31:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP31AB1;
+          }
+          else {
+            state.d = state.OP31AB2;
+          }
+        
+        state.OP31AB1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d8;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.OP132;
+        
+        state.OP31AB2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d8;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.OP132;
+        
+        state.OP1:
+          alufn = 110011;
+          asel = b10;
+          bsel = b00;
+          we = b1;
+          rb = 4d11;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCHOP1;
+        
+        state.BRANCHOP1:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.OP1AB1;
+          }
+          else {
+            state.d = state.OP1AB2;
+          }
+        
+        state.OP1AB1:
+          alufn = 000001;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d8;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.OP12;
+        
+        state.OP1AB2:
+          alufn = 000000;
+          asel = b00;
+          bsel = b00;
+          we = b1;
+          ra = 4d7;
+          rb = 4d8;
+          rc = 4d8;
+          wdsel = b00;
+          state.d = state.OP12;
+        
+        state.CHECK_C24:
+          alufn = 110011;
+          asel = b00;
+          bsel = b01;
+          we = b1;
+          ra = 4d9;
+          rc = 4d15;
+          wdsel = b00;
+          state.d = state.BRANCH_CHECK_C24;
+        
+        state.BRANCH_CHECK_C24:
+          we = b0;
+          rb = 4d15;
+          if (rbdata[0]) {
+            state.d = state.GREEN_LED;
+          }
+          else {
+            state.d = state.RED_LED;
+          }
+        
+        state.GREEN_LED:
+          alufn = 000000;
+          asel = b10;        //2
+          bsel = b10;        //0
+          we = b1;
+          rc = 4d4;          //RESULTS REG
+          wdsel = b00;
+          state.d = state.GREEN_LED_TIMER;
+        
+        state.GREEN_LED_TIMER:
+          alufn = 000000;
+          asel = b11;        //3
+          bsel = b11;        //1
+          we = b1;
+          rc = 4d14;         //RESULTS TIMER REG
+          wdsel = b00;
+          state.d = state.ADD_POINT;
+        
+        state.ADD_POINT:
+          alufn = 000000;
+          asel = b00;        
+          bsel = b11;        //1
+          we = b1;
+          ra = 4d5;
+          rc = 4d5;          //POINTS REG
+          wdsel = b00;
+          state.d = state.RANDSEL;
+        
+        state.RED_LED:
+          alufn = 000000;
+          asel = b01;        //1
+          bsel = b10;        //0
+          we = b1;
+          rc = 4d4;          //RESULTS REG
+          wdsel = b00;
+          state.d = state.RED_LED_TIMER;
+        
+        state.RED_LED_TIMER:
+          alufn = 000000;
+          asel = b11;        //3
+          bsel = b11;        //1
+          we = b1;
+          rc = 4d14;         //RESULTS TIMER REG
+          wdsel = b00;
+          state.d = state.RESET_FIRST_INPUT;
+    }
+  }
+}

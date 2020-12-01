@@ -1,0 +1,1158 @@
+
+*** Running vivado
+    with args -log au_top_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
+
+
+
+****** Vivado v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source au_top_0.tcl -notrace
+Command: synth_design -top au_top_0 -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9372
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'au_top_0' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/au_top_0.v:7]
+INFO: [Synth 8-6157] synthesizing module 'reset_conditioner_1' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/reset_conditioner_1.v:11]
+	Parameter STAGES bound to: 3'b100 
+INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner_1' (1#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/reset_conditioner_1.v:11]
+INFO: [Synth 8-6157] synthesizing module 'game_beta_2' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_beta_2.v:7]
+INFO: [Synth 8-6157] synthesizing module 'game_regfile_10' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_regfile_10.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_regfile_10.v:115]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_regfile_10.v:169]
+INFO: [Synth 8-6155] done synthesizing module 'game_regfile_10' (2#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_regfile_10.v:7]
+INFO: [Synth 8-6157] synthesizing module 'final_state_machine_11' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/final_state_machine_11.v:7]
+	Parameter START_state bound to: 9'b000000000 
+	Parameter START_TIMER_state bound to: 9'b000000001 
+	Parameter RANDSEL_state bound to: 9'b000000010 
+	Parameter FIRST_INTEGER_state bound to: 9'b000000011 
+	Parameter SECOND_INTEGER_state bound to: 9'b000000100 
+	Parameter THIRD_INTEGER_state bound to: 9'b000000101 
+	Parameter FOURTH_INTEGER_state bound to: 9'b000000110 
+	Parameter RESET_POINTS_state bound to: 9'b000000111 
+	Parameter RESET_FIRST_INPUT_state bound to: 9'b000001000 
+	Parameter RESET_SECOND_INPUT_state bound to: 9'b000001001 
+	Parameter RESET_THIRD_INPUT_state bound to: 9'b000001010 
+	Parameter RESET_FOURTH_INPUT_state bound to: 9'b000001011 
+	Parameter RESET_FIRST_OP_state bound to: 9'b000001100 
+	Parameter RESET_SECOND_OP_state bound to: 9'b000001101 
+	Parameter RESET_THIRD_OP_state bound to: 9'b000001110 
+	Parameter IDLE_state bound to: 9'b000001111 
+	Parameter DECREASE_TIMER_state bound to: 9'b000010000 
+	Parameter CHECK_TIMER_state bound to: 9'b000010001 
+	Parameter BRANCH_TIMER_state bound to: 9'b000010010 
+	Parameter CHECK_RESULT_TIMER_state bound to: 9'b000010011 
+	Parameter BRANCH_RESULT_TIMER_state bound to: 9'b000010100 
+	Parameter DECREASE_RESULT_TIMER_state bound to: 9'b000010101 
+	Parameter RESET_RESULT_REG_state bound to: 9'b000010110 
+	Parameter GAMEOVER_state bound to: 9'b000010111 
+	Parameter INP1A_state bound to: 9'b000011000 
+	Parameter BRANCHINP1A_state bound to: 9'b000011001 
+	Parameter INP2A_state bound to: 9'b000011010 
+	Parameter BRANCHINP2A_state bound to: 9'b000011011 
+	Parameter INP3A_state bound to: 9'b000011100 
+	Parameter BRANCHINP3A_state bound to: 9'b000011101 
+	Parameter INP4A_state bound to: 9'b000011110 
+	Parameter BRANCHINP4A_state bound to: 9'b000011111 
+	Parameter DECREASE_TIMER1A_state bound to: 9'b000100000 
+	Parameter CHECK_TIMER1A_state bound to: 9'b000100001 
+	Parameter BRANCH_TIMER1A_state bound to: 9'b000100010 
+	Parameter CHECK_RESULT_TIMER1A_state bound to: 9'b000100011 
+	Parameter BRANCH_RESULT_TIMER1A_state bound to: 9'b000100100 
+	Parameter DECREASE_RESULT_TIMER1A_state bound to: 9'b000100101 
+	Parameter RESET_RESULT_REG1A_state bound to: 9'b000100110 
+	Parameter DECREASE_TIMER2A_state bound to: 9'b000100111 
+	Parameter CHECK_TIMER2A_state bound to: 9'b000101000 
+	Parameter BRANCH_TIMER2A_state bound to: 9'b000101001 
+	Parameter CHECK_RESULT_TIMER2A_state bound to: 9'b000101010 
+	Parameter BRANCH_RESULT_TIMER2A_state bound to: 9'b000101011 
+	Parameter DECREASE_RESULT_TIMER2A_state bound to: 9'b000101100 
+	Parameter RESET_RESULT_REG2A_state bound to: 9'b000101101 
+	Parameter DECREASE_TIMER3A_state bound to: 9'b000101110 
+	Parameter CHECK_TIMER3A_state bound to: 9'b000101111 
+	Parameter BRANCH_TIMER3A_state bound to: 9'b000110000 
+	Parameter CHECK_RESULT_TIMER3A_state bound to: 9'b000110001 
+	Parameter BRANCH_RESULT_TIMER3A_state bound to: 9'b000110010 
+	Parameter DECREASE_RESULT_TIMER3A_state bound to: 9'b000110011 
+	Parameter RESET_RESULT_REG3A_state bound to: 9'b000110100 
+	Parameter DECREASE_TIMER4A_state bound to: 9'b000110101 
+	Parameter CHECK_TIMER4A_state bound to: 9'b000110110 
+	Parameter BRANCH_TIMER4A_state bound to: 9'b000110111 
+	Parameter CHECK_RESULT_TIMER4A_state bound to: 9'b000111000 
+	Parameter BRANCH_RESULT_TIMER4A_state bound to: 9'b000111001 
+	Parameter DECREASE_RESULT_TIMER4A_state bound to: 9'b000111010 
+	Parameter RESET_RESULT_REG4A_state bound to: 9'b000111011 
+	Parameter INP1ADD_state bound to: 9'b000111100 
+	Parameter INP1SUB_state bound to: 9'b000111101 
+	Parameter INP1MUL_state bound to: 9'b000111110 
+	Parameter INP2ADD_state bound to: 9'b000111111 
+	Parameter INP2SUB_state bound to: 9'b001000000 
+	Parameter INP2MUL_state bound to: 9'b001000001 
+	Parameter INP3ADD_state bound to: 9'b001000010 
+	Parameter INP3SUB_state bound to: 9'b001000011 
+	Parameter INP3MUL_state bound to: 9'b001000100 
+	Parameter INP4ADD_state bound to: 9'b001000101 
+	Parameter INP4SUB_state bound to: 9'b001000110 
+	Parameter INP4MUL_state bound to: 9'b001000111 
+	Parameter INP1B_state bound to: 9'b001001000 
+	Parameter INP2B_state bound to: 9'b001001001 
+	Parameter INP3B_state bound to: 9'b001001010 
+	Parameter INP4B_state bound to: 9'b001001011 
+	Parameter DECREASE_TIMER1B_state bound to: 9'b001001100 
+	Parameter CHECK_TIMER1B_state bound to: 9'b001001101 
+	Parameter BRANCH_TIMER1B_state bound to: 9'b001001110 
+	Parameter CHECK_RESULT_TIMER1B_state bound to: 9'b001001111 
+	Parameter BRANCH_RESULT_TIMER1B_state bound to: 9'b001010000 
+	Parameter DECREASE_RESULT_TIMER1B_state bound to: 9'b001010001 
+	Parameter RESET_RESULT_REG1B_state bound to: 9'b001010010 
+	Parameter DECREASE_TIMER2B_state bound to: 9'b001010011 
+	Parameter CHECK_TIMER2B_state bound to: 9'b001010100 
+	Parameter BRANCH_TIMER2B_state bound to: 9'b001010101 
+	Parameter CHECK_RESULT_TIMER2B_state bound to: 9'b001010110 
+	Parameter BRANCH_RESULT_TIMER2B_state bound to: 9'b001010111 
+	Parameter DECREASE_RESULT_TIMER2B_state bound to: 9'b001011000 
+	Parameter RESET_RESULT_REG2B_state bound to: 9'b001011001 
+	Parameter DECREASE_TIMER3B_state bound to: 9'b001011010 
+	Parameter CHECK_TIMER3B_state bound to: 9'b001011011 
+	Parameter BRANCH_TIMER3B_state bound to: 9'b001011100 
+	Parameter CHECK_RESULT_TIMER3B_state bound to: 9'b001011101 
+	Parameter BRANCH_RESULT_TIMER3B_state bound to: 9'b001011110 
+	Parameter DECREASE_RESULT_TIMER3B_state bound to: 9'b001011111 
+	Parameter RESET_RESULT_REG3B_state bound to: 9'b001100000 
+	Parameter DECREASE_TIMER4B_state bound to: 9'b001100001 
+	Parameter CHECK_TIMER4B_state bound to: 9'b001100010 
+	Parameter BRANCH_TIMER4B_state bound to: 9'b001100011 
+	Parameter CHECK_RESULT_TIMER4B_state bound to: 9'b001100100 
+	Parameter BRANCH_RESULT_TIMER4B_state bound to: 9'b001100101 
+	Parameter DECREASE_RESULT_TIMER4B_state bound to: 9'b001100110 
+	Parameter RESET_RESULT_REG4B_state bound to: 9'b001100111 
+	Parameter INP12A_state bound to: 9'b001101000 
+	Parameter INP13A_state bound to: 9'b001101001 
+	Parameter INP14A_state bound to: 9'b001101010 
+	Parameter INP21A_state bound to: 9'b001101011 
+	Parameter INP23A_state bound to: 9'b001101100 
+	Parameter INP24A_state bound to: 9'b001101101 
+	Parameter INP31A_state bound to: 9'b001101110 
+	Parameter INP32A_state bound to: 9'b001101111 
+	Parameter INP34A_state bound to: 9'b001110000 
+	Parameter INP41A_state bound to: 9'b001110001 
+	Parameter INP42A_state bound to: 9'b001110010 
+	Parameter INP43A_state bound to: 9'b001110011 
+	Parameter BRANCHINP12A_state bound to: 9'b001110100 
+	Parameter BRANCHINP13A_state bound to: 9'b001110101 
+	Parameter BRANCHINP14A_state bound to: 9'b001110110 
+	Parameter BRANCHINP23A_state bound to: 9'b001110111 
+	Parameter BRANCHINP24A_state bound to: 9'b001111000 
+	Parameter BRANCHINP34A_state bound to: 9'b001111001 
+	Parameter DECREASE_TIMER12A_state bound to: 9'b001111010 
+	Parameter CHECK_TIMER12A_state bound to: 9'b001111011 
+	Parameter BRANCH_TIMER12A_state bound to: 9'b001111100 
+	Parameter CHECK_RESULT_TIMER12A_state bound to: 9'b001111101 
+	Parameter BRANCH_RESULT_TIMER12A_state bound to: 9'b001111110 
+	Parameter DECREASE_RESULT_TIMER12A_state bound to: 9'b001111111 
+	Parameter RESET_RESULT_REG12A_state bound to: 9'b010000000 
+	Parameter DECREASE_TIMER13A_state bound to: 9'b010000001 
+	Parameter CHECK_TIMER13A_state bound to: 9'b010000010 
+	Parameter BRANCH_TIMER13A_state bound to: 9'b010000011 
+	Parameter CHECK_RESULT_TIMER13A_state bound to: 9'b010000100 
+	Parameter BRANCH_RESULT_TIMER13A_state bound to: 9'b010000101 
+	Parameter DECREASE_RESULT_TIMER13A_state bound to: 9'b010000110 
+	Parameter RESET_RESULT_REG13A_state bound to: 9'b010000111 
+	Parameter DECREASE_TIMER14A_state bound to: 9'b010001000 
+	Parameter CHECK_TIMER14A_state bound to: 9'b010001001 
+	Parameter BRANCH_TIMER14A_state bound to: 9'b010001010 
+	Parameter CHECK_RESULT_TIMER14A_state bound to: 9'b010001011 
+	Parameter BRANCH_RESULT_TIMER14A_state bound to: 9'b010001100 
+	Parameter DECREASE_RESULT_TIMER14A_state bound to: 9'b010001101 
+	Parameter RESET_RESULT_REG14A_state bound to: 9'b010001110 
+	Parameter DECREASE_TIMER23A_state bound to: 9'b010001111 
+	Parameter CHECK_TIMER23A_state bound to: 9'b010010000 
+	Parameter BRANCH_TIMER23A_state bound to: 9'b010010001 
+	Parameter CHECK_RESULT_TIMER23A_state bound to: 9'b010010010 
+	Parameter BRANCH_RESULT_TIMER23A_state bound to: 9'b010010011 
+	Parameter DECREASE_RESULT_TIMER23A_state bound to: 9'b010010100 
+	Parameter RESET_RESULT_REG23A_state bound to: 9'b010010101 
+	Parameter DECREASE_TIMER24A_state bound to: 9'b010010110 
+	Parameter CHECK_TIMER24A_state bound to: 9'b010010111 
+	Parameter BRANCH_TIMER24A_state bound to: 9'b010011000 
+	Parameter CHECK_RESULT_TIMER24A_state bound to: 9'b010011001 
+	Parameter BRANCH_RESULT_TIMER24A_state bound to: 9'b010011010 
+	Parameter DECREASE_RESULT_TIMER24A_state bound to: 9'b010011011 
+	Parameter RESET_RESULT_REG24A_state bound to: 9'b010011100 
+	Parameter DECREASE_TIMER34A_state bound to: 9'b010011101 
+	Parameter CHECK_TIMER34A_state bound to: 9'b010011110 
+	Parameter BRANCH_TIMER34A_state bound to: 9'b010011111 
+	Parameter CHECK_RESULT_TIMER34A_state bound to: 9'b010100000 
+	Parameter BRANCH_RESULT_TIMER34A_state bound to: 9'b010100001 
+	Parameter DECREASE_RESULT_TIMER34A_state bound to: 9'b010100010 
+	Parameter RESET_RESULT_REG34A_state bound to: 9'b010100011 
+	Parameter INP12ADD_state bound to: 9'b010100100 
+	Parameter INP12SUB_state bound to: 9'b010100101 
+	Parameter INP12MUL_state bound to: 9'b010100110 
+	Parameter INP13ADD_state bound to: 9'b010100111 
+	Parameter INP13SUB_state bound to: 9'b010101000 
+	Parameter INP13MUL_state bound to: 9'b010101001 
+	Parameter INP14ADD_state bound to: 9'b010101010 
+	Parameter INP14SUB_state bound to: 9'b010101011 
+	Parameter INP14MUL_state bound to: 9'b010101100 
+	Parameter INP23ADD_state bound to: 9'b010101101 
+	Parameter INP23SUB_state bound to: 9'b010101110 
+	Parameter INP23MUL_state bound to: 9'b010101111 
+	Parameter INP24ADD_state bound to: 9'b010110000 
+	Parameter INP24SUB_state bound to: 9'b010110001 
+	Parameter INP24MUL_state bound to: 9'b010110010 
+	Parameter INP34ADD_state bound to: 9'b010110011 
+	Parameter INP34SUB_state bound to: 9'b010110100 
+	Parameter INP34MUL_state bound to: 9'b010110101 
+	Parameter INP12B_state bound to: 9'b010110110 
+	Parameter INP13B_state bound to: 9'b010110111 
+	Parameter INP14B_state bound to: 9'b010111000 
+	Parameter INP23B_state bound to: 9'b010111001 
+	Parameter INP24B_state bound to: 9'b010111010 
+	Parameter INP34B_state bound to: 9'b010111011 
+	Parameter DECREASE_TIMER12B_state bound to: 9'b010111100 
+	Parameter CHECK_TIMER12B_state bound to: 9'b010111101 
+	Parameter BRANCH_TIMER12B_state bound to: 9'b010111110 
+	Parameter CHECK_RESULT_TIMER12B_state bound to: 9'b010111111 
+	Parameter BRANCH_RESULT_TIMER12B_state bound to: 9'b011000000 
+	Parameter DECREASE_RESULT_TIMER12B_state bound to: 9'b011000001 
+	Parameter RESET_RESULT_REG12B_state bound to: 9'b011000010 
+	Parameter DECREASE_TIMER13B_state bound to: 9'b011000011 
+	Parameter CHECK_TIMER13B_state bound to: 9'b011000100 
+	Parameter BRANCH_TIMER13B_state bound to: 9'b011000101 
+	Parameter CHECK_RESULT_TIMER13B_state bound to: 9'b011000110 
+	Parameter BRANCH_RESULT_TIMER13B_state bound to: 9'b011000111 
+	Parameter DECREASE_RESULT_TIMER13B_state bound to: 9'b011001000 
+	Parameter RESET_RESULT_REG13B_state bound to: 9'b011001001 
+	Parameter DECREASE_TIMER14B_state bound to: 9'b011001010 
+	Parameter CHECK_TIMER14B_state bound to: 9'b011001011 
+	Parameter BRANCH_TIMER14B_state bound to: 9'b011001100 
+	Parameter CHECK_RESULT_TIMER14B_state bound to: 9'b011001101 
+	Parameter BRANCH_RESULT_TIMER14B_state bound to: 9'b011001110 
+	Parameter DECREASE_RESULT_TIMER14B_state bound to: 9'b011001111 
+	Parameter RESET_RESULT_REG14B_state bound to: 9'b011010000 
+	Parameter DECREASE_TIMER23B_state bound to: 9'b011010001 
+	Parameter CHECK_TIMER23B_state bound to: 9'b011010010 
+	Parameter BRANCH_TIMER23B_state bound to: 9'b011010011 
+	Parameter CHECK_RESULT_TIMER23B_state bound to: 9'b011010100 
+	Parameter BRANCH_RESULT_TIMER23B_state bound to: 9'b011010101 
+	Parameter DECREASE_RESULT_TIMER23B_state bound to: 9'b011010110 
+	Parameter RESET_RESULT_REG23B_state bound to: 9'b011010111 
+	Parameter DECREASE_TIMER24B_state bound to: 9'b011011000 
+	Parameter CHECK_TIMER24B_state bound to: 9'b011011001 
+	Parameter BRANCH_TIMER24B_state bound to: 9'b011011010 
+	Parameter CHECK_RESULT_TIMER24B_state bound to: 9'b011011011 
+	Parameter BRANCH_RESULT_TIMER24B_state bound to: 9'b011011100 
+	Parameter DECREASE_RESULT_TIMER24B_state bound to: 9'b011011101 
+	Parameter RESET_RESULT_REG24B_state bound to: 9'b011011110 
+	Parameter DECREASE_TIMER34B_state bound to: 9'b011011111 
+	Parameter CHECK_TIMER34B_state bound to: 9'b011100000 
+	Parameter BRANCH_TIMER34B_state bound to: 9'b011100001 
+	Parameter CHECK_RESULT_TIMER34B_state bound to: 9'b011100010 
+	Parameter BRANCH_RESULT_TIMER34B_state bound to: 9'b011100011 
+	Parameter DECREASE_RESULT_TIMER34B_state bound to: 9'b011100100 
+	Parameter RESET_RESULT_REG34B_state bound to: 9'b011100101 
+	Parameter INP123A_state bound to: 9'b011100110 
+	Parameter INP124A_state bound to: 9'b011100111 
+	Parameter INP132A_state bound to: 9'b011101000 
+	Parameter INP134A_state bound to: 9'b011101001 
+	Parameter INP142A_state bound to: 9'b011101010 
+	Parameter INP143A_state bound to: 9'b011101011 
+	Parameter INP231A_state bound to: 9'b011101100 
+	Parameter INP234A_state bound to: 9'b011101101 
+	Parameter INP241A_state bound to: 9'b011101110 
+	Parameter INP243A_state bound to: 9'b011101111 
+	Parameter INP341A_state bound to: 9'b011110000 
+	Parameter INP342A_state bound to: 9'b011110001 
+	Parameter BRANCHINP123A_state bound to: 9'b011110010 
+	Parameter BRANCHINP124A_state bound to: 9'b011110011 
+	Parameter BRANCHINP134A_state bound to: 9'b011110100 
+	Parameter BRANCHINP234A_state bound to: 9'b011110101 
+	Parameter DECREASE_TIMER123A_state bound to: 9'b011110110 
+	Parameter CHECK_TIMER123A_state bound to: 9'b011110111 
+	Parameter BRANCH_TIMER123A_state bound to: 9'b011111000 
+	Parameter CHECK_RESULT_TIMER123A_state bound to: 9'b011111001 
+	Parameter BRANCH_RESULT_TIMER123A_state bound to: 9'b011111010 
+	Parameter DECREASE_RESULT_TIMER123A_state bound to: 9'b011111011 
+	Parameter RESET_RESULT_REG123A_state bound to: 9'b011111100 
+	Parameter DECREASE_TIMER124A_state bound to: 9'b011111101 
+	Parameter CHECK_TIMER124A_state bound to: 9'b011111110 
+	Parameter BRANCH_TIMER124A_state bound to: 9'b011111111 
+	Parameter CHECK_RESULT_TIMER124A_state bound to: 9'b100000000 
+	Parameter BRANCH_RESULT_TIMER124A_state bound to: 9'b100000001 
+	Parameter DECREASE_RESULT_TIMER124A_state bound to: 9'b100000010 
+	Parameter RESET_RESULT_REG124A_state bound to: 9'b100000011 
+	Parameter DECREASE_TIMER134A_state bound to: 9'b100000100 
+	Parameter CHECK_TIMER134A_state bound to: 9'b100000101 
+	Parameter BRANCH_TIMER134A_state bound to: 9'b100000110 
+	Parameter CHECK_RESULT_TIMER134A_state bound to: 9'b100000111 
+	Parameter BRANCH_RESULT_TIMER134A_state bound to: 9'b100001000 
+	Parameter DECREASE_RESULT_TIMER134A_state bound to: 9'b100001001 
+	Parameter RESET_RESULT_REG134A_state bound to: 9'b100001010 
+	Parameter DECREASE_TIMER234A_state bound to: 9'b100001011 
+	Parameter CHECK_TIMER234A_state bound to: 9'b100001100 
+	Parameter BRANCH_TIMER234A_state bound to: 9'b100001101 
+	Parameter CHECK_RESULT_TIMER234A_state bound to: 9'b100001110 
+	Parameter BRANCH_RESULT_TIMER234A_state bound to: 9'b100001111 
+	Parameter DECREASE_RESULT_TIMER234A_state bound to: 9'b100010000 
+	Parameter RESET_RESULT_REG234A_state bound to: 9'b100010001 
+	Parameter INP123ADD_state bound to: 9'b100010010 
+	Parameter INP123SUB_state bound to: 9'b100010011 
+	Parameter INP123MUL_state bound to: 9'b100010100 
+	Parameter INP124ADD_state bound to: 9'b100010101 
+	Parameter INP124SUB_state bound to: 9'b100010110 
+	Parameter INP124MUL_state bound to: 9'b100010111 
+	Parameter INP134ADD_state bound to: 9'b100011000 
+	Parameter INP134SUB_state bound to: 9'b100011001 
+	Parameter INP134MUL_state bound to: 9'b100011010 
+	Parameter INP234ADD_state bound to: 9'b100011011 
+	Parameter INP234SUB_state bound to: 9'b100011100 
+	Parameter INP234MUL_state bound to: 9'b100011101 
+	Parameter INP123B_state bound to: 9'b100011110 
+	Parameter INP124B_state bound to: 9'b100011111 
+	Parameter INP134B_state bound to: 9'b100100000 
+	Parameter INP234B_state bound to: 9'b100100001 
+	Parameter DECREASE_TIMER123B_state bound to: 9'b100100010 
+	Parameter CHECK_TIMER123B_state bound to: 9'b100100011 
+	Parameter BRANCH_TIMER123B_state bound to: 9'b100100100 
+	Parameter CHECK_RESULT_TIMER123B_state bound to: 9'b100100101 
+	Parameter BRANCH_RESULT_TIMER123B_state bound to: 9'b100100110 
+	Parameter DECREASE_RESULT_TIMER123B_state bound to: 9'b100100111 
+	Parameter RESET_RESULT_REG123B_state bound to: 9'b100101000 
+	Parameter DECREASE_TIMER124B_state bound to: 9'b100101001 
+	Parameter CHECK_TIMER124B_state bound to: 9'b100101010 
+	Parameter BRANCH_TIMER124B_state bound to: 9'b100101011 
+	Parameter CHECK_RESULT_TIMER124B_state bound to: 9'b100101100 
+	Parameter BRANCH_RESULT_TIMER124B_state bound to: 9'b100101101 
+	Parameter DECREASE_RESULT_TIMER124B_state bound to: 9'b100101110 
+	Parameter RESET_RESULT_REG124B_state bound to: 9'b100101111 
+	Parameter DECREASE_TIMER134B_state bound to: 9'b100110000 
+	Parameter CHECK_TIMER134B_state bound to: 9'b100110001 
+	Parameter BRANCH_TIMER134B_state bound to: 9'b100110010 
+	Parameter CHECK_RESULT_TIMER134B_state bound to: 9'b100110011 
+	Parameter BRANCH_RESULT_TIMER134B_state bound to: 9'b100110100 
+	Parameter DECREASE_RESULT_TIMER134B_state bound to: 9'b100110101 
+	Parameter RESET_RESULT_REG134B_state bound to: 9'b100110110 
+	Parameter DECREASE_TIMER234B_state bound to: 9'b100110111 
+	Parameter CHECK_TIMER234B_state bound to: 9'b100111000 
+	Parameter BRANCH_TIMER234B_state bound to: 9'b100111001 
+	Parameter CHECK_RESULT_TIMER234B_state bound to: 9'b100111010 
+	Parameter BRANCH_RESULT_TIMER234B_state bound to: 9'b100111011 
+	Parameter DECREASE_RESULT_TIMER234B_state bound to: 9'b100111100 
+	Parameter RESET_RESULT_REG234B_state bound to: 9'b100111101 
+	Parameter INPXXX1_state bound to: 9'b100111110 
+	Parameter INPXXX2_state bound to: 9'b100111111 
+	Parameter INPXXX3_state bound to: 9'b101000000 
+	Parameter INPXXX4_state bound to: 9'b101000001 
+	Parameter CONFIRM_state bound to: 9'b101000010 
+	Parameter DECREASE_TIMER_CONFIRM_state bound to: 9'b101000011 
+	Parameter CHECK_TIMER_CONFIRM_state bound to: 9'b101000100 
+	Parameter BRANCH_TIMER_CONFIRM_state bound to: 9'b101000101 
+	Parameter CHECK_RESULT_TIMER_CONFIRM_state bound to: 9'b101000110 
+	Parameter BRANCH_RESULT_TIMER_CONFIRM_state bound to: 9'b101000111 
+	Parameter DECREASE_RESULT_TIMER_CONFIRM_state bound to: 9'b101001000 
+	Parameter RESET_RESULT_REG_CONFIRM_state bound to: 9'b101001001 
+	Parameter OP1X_state bound to: 9'b101001010 
+	Parameter BRANCHOP1X_state bound to: 9'b101001011 
+	Parameter OP1AB_state bound to: 9'b101001100 
+	Parameter OP12X_state bound to: 9'b101001101 
+	Parameter BRANCHOP12X_state bound to: 9'b101001110 
+	Parameter OP12BC_state bound to: 9'b101001111 
+	Parameter OP123X_state bound to: 9'b101010000 
+	Parameter BRANCHOP123X_state bound to: 9'b101010001 
+	Parameter OP123CD_state bound to: 9'b101010010 
+	Parameter OP123_state bound to: 9'b101010011 
+	Parameter BRANCHOP123_state bound to: 9'b101010100 
+	Parameter OP123CD1_state bound to: 9'b101010101 
+	Parameter OP123CD2_state bound to: 9'b101010110 
+	Parameter OP13X_state bound to: 9'b101010111 
+	Parameter BRANCHOP13X_state bound to: 9'b101011000 
+	Parameter OP13CD_state bound to: 9'b101011001 
+	Parameter OP132_state bound to: 9'b101011010 
+	Parameter BRANCHOP132_state bound to: 9'b101011011 
+	Parameter OP132BC1_state bound to: 9'b101011100 
+	Parameter OP132BC2_state bound to: 9'b101011101 
+	Parameter OP12_state bound to: 9'b101011110 
+	Parameter BRANCHOP12_state bound to: 9'b101011111 
+	Parameter OP12BC1_state bound to: 9'b101100000 
+	Parameter OP12BC2_state bound to: 9'b101100001 
+	Parameter OP2X_state bound to: 9'b101100010 
+	Parameter BRANCHOP2X_state bound to: 9'b101100011 
+	Parameter OP2BC_state bound to: 9'b101100100 
+	Parameter OP23X_state bound to: 9'b101100101 
+	Parameter BRANCHOP23X_state bound to: 9'b101100110 
+	Parameter OP23CD_state bound to: 9'b101100111 
+	Parameter OP231_state bound to: 9'b101101000 
+	Parameter BRANCHOP231_state bound to: 9'b101101001 
+	Parameter OP231AC1_state bound to: 9'b101101010 
+	Parameter OP231AC2_state bound to: 9'b101101011 
+	Parameter OP21_state bound to: 9'b101101100 
+	Parameter BRANCHOP21_state bound to: 9'b101101101 
+	Parameter OP21AC1_state bound to: 9'b101101110 
+	Parameter OP21AC2_state bound to: 9'b101101111 
+	Parameter OP3X_state bound to: 9'b101110000 
+	Parameter BRANCHOP3X_state bound to: 9'b101110001 
+	Parameter OP3CD_state bound to: 9'b101110010 
+	Parameter OP31_state bound to: 9'b101110011 
+	Parameter BRANCHOP31_state bound to: 9'b101110100 
+	Parameter OP31AB1_state bound to: 9'b101110101 
+	Parameter OP31AB2_state bound to: 9'b101110110 
+	Parameter OP1_state bound to: 9'b101110111 
+	Parameter BRANCHOP1_state bound to: 9'b101111000 
+	Parameter OP1AB1_state bound to: 9'b101111001 
+	Parameter OP1AB2_state bound to: 9'b101111010 
+	Parameter CHECK_C24_state bound to: 9'b101111011 
+	Parameter BRANCH_CHECK_C24_state bound to: 9'b101111100 
+	Parameter RED_LED_state bound to: 9'b101111101 
+	Parameter RED_LED_TIMER_state bound to: 9'b101111110 
+	Parameter GREEN_LED_state bound to: 9'b101111111 
+	Parameter GREEN_LED_TIMER_state bound to: 9'b110000000 
+	Parameter ADD_POINT_state bound to: 9'b110000001 
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/final_state_machine_11.v:445]
+INFO: [Synth 8-6155] done synthesizing module 'final_state_machine_11' (3#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/final_state_machine_11.v:7]
+INFO: [Synth 8-6157] synthesizing module 'input_integers_12' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:7]
+INFO: [Synth 8-6157] synthesizing module 'pn_gen_20' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/pn_gen_20.v:11]
+	Parameter SEED bound to: 128'b10000100001100100011001101010010001110100110000100111001011001100100001000111011011000100010010101100010010110010010110001100010 
+INFO: [Synth 8-6155] done synthesizing module 'pn_gen_20' (4#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/pn_gen_20.v:11]
+WARNING: [Synth 8-151] case item 4'b1000 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:93]
+WARNING: [Synth 8-151] case item 4'b1001 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:99]
+WARNING: [Synth 8-151] case item 4'b1010 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:105]
+WARNING: [Synth 8-151] case item 4'b1011 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:111]
+WARNING: [Synth 8-151] case item 4'b1100 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:117]
+WARNING: [Synth 8-151] case item 4'b1101 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:123]
+WARNING: [Synth 8-151] case item 4'b1110 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:129]
+WARNING: [Synth 8-151] case item 4'b1111 is unreachable [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:135]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:44]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:149]
+INFO: [Synth 8-6155] done synthesizing module 'input_integers_12' (5#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/input_integers_12.v:7]
+INFO: [Synth 8-6157] synthesizing module 'game_alu_13' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_alu_13.v:7]
+INFO: [Synth 8-6157] synthesizing module 'comparator_21' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/comparator_21.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/comparator_21.v:26]
+INFO: [Synth 8-6155] done synthesizing module 'comparator_21' (6#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/comparator_21.v:7]
+INFO: [Synth 8-6157] synthesizing module 'sixteen_bit_full_adder_22' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_22.v:7]
+INFO: [Synth 8-6157] synthesizing module 'full_adder_26' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/full_adder_26.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder_26' (7#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/full_adder_26.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'sixteen_bit_full_adder_22' (8#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/sixteen_bit_full_adder_22.v:7]
+INFO: [Synth 8-6157] synthesizing module 'boolean_23' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/boolean_23.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'boolean_23' (9#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/boolean_23.v:7]
+INFO: [Synth 8-6157] synthesizing module 'shifter_24' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shifter_24.v:7]
+INFO: [Synth 8-6157] synthesizing module 'shift_left_27' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:23]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:36]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:49]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'shift_left_27' (10#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_left_27.v:7]
+INFO: [Synth 8-6157] synthesizing module 'shift_right_28' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:27]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:40]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:53]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'shift_right_28' (11#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shift_right_28.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shifter_24.v:43]
+INFO: [Synth 8-6155] done synthesizing module 'shifter_24' (12#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/shifter_24.v:7]
+INFO: [Synth 8-6157] synthesizing module 'multiplier_25' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/multiplier_25.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'multiplier_25' (13#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/multiplier_25.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_alu_13.v:97]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_alu_13.v:100]
+INFO: [Synth 8-6155] done synthesizing module 'game_alu_13' (14#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_alu_13.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_beta_2.v:149]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_beta_2.v:167]
+INFO: [Synth 8-226] default block is never used [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_beta_2.v:185]
+INFO: [Synth 8-6155] done synthesizing module 'game_beta_2' (15#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/game_beta_2.v:7]
+INFO: [Synth 8-6157] synthesizing module 'two_seven_seg_3' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/two_seven_seg_3.v:12]
+	Parameter DIGITS bound to: 2'b10 
+	Parameter DIV bound to: 5'b10000 
+	Parameter DIGIT_BITS bound to: 1'b1 
+INFO: [Synth 8-6157] synthesizing module 'counter_14' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/counter_14.v:14]
+	Parameter SIZE bound to: 1'b1 
+	Parameter DIV bound to: 5'b10000 
+	Parameter TOP bound to: 3'b001 
+	Parameter UP bound to: 1'b1 
+	Parameter MAX_VALUE bound to: 19'b0011111111111111111 
+INFO: [Synth 8-6155] done synthesizing module 'counter_14' (16#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/counter_14.v:14]
+INFO: [Synth 8-6157] synthesizing module 'seven_seg_8' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/seven_seg_8.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'seven_seg_8' (17#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/seven_seg_8.v:7]
+INFO: [Synth 8-6157] synthesizing module 'decoder_15' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decoder_15.v:11]
+	Parameter WIDTH bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'decoder_15' (18#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decoder_15.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'two_seven_seg_3' (19#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/two_seven_seg_3.v:12]
+INFO: [Synth 8-6157] synthesizing module 'multi_dec_ctr_4' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/multi_dec_ctr_4.v:11]
+	Parameter DIGITS bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'decimal_counter_16' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decimal_counter_16.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'decimal_counter_16' (20#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decimal_counter_16.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'multi_dec_ctr_4' (21#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/multi_dec_ctr_4.v:11]
+INFO: [Synth 8-6157] synthesizing module 'four_seven_seg_5' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/four_seven_seg_5.v:12]
+	Parameter DIGITS bound to: 3'b100 
+	Parameter DIV bound to: 5'b10000 
+	Parameter DIGIT_BITS bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'counter_17' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/counter_17.v:14]
+	Parameter SIZE bound to: 2'b10 
+	Parameter DIV bound to: 5'b10000 
+	Parameter TOP bound to: 4'b0011 
+	Parameter UP bound to: 1'b1 
+	Parameter MAX_VALUE bound to: 20'b00111111111111111111 
+INFO: [Synth 8-6155] done synthesizing module 'counter_17' (22#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/counter_17.v:14]
+INFO: [Synth 8-6157] synthesizing module 'seven_seg_no_zero_9' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/seven_seg_no_zero_9.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'seven_seg_no_zero_9' (23#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/seven_seg_no_zero_9.v:7]
+INFO: [Synth 8-6157] synthesizing module 'decoder_18' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decoder_18.v:11]
+	Parameter WIDTH bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'decoder_18' (24#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/decoder_18.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'four_seven_seg_5' (25#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/four_seven_seg_5.v:12]
+INFO: [Synth 8-6157] synthesizing module 'button_conditioner_6' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/button_conditioner_6.v:13]
+	Parameter CLK_FREQ bound to: 26'b10111110101111000010000000 
+	Parameter MIN_DELAY bound to: 5'b10100 
+	Parameter NUM_SYNC bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'pipeline_19' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/pipeline_19.v:11]
+	Parameter DEPTH bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_19' (26#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/pipeline_19.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'button_conditioner_6' (27#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/button_conditioner_6.v:13]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector_7' [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/edge_detector_7.v:12]
+	Parameter RISE bound to: 1'b1 
+	Parameter FALL bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector_7' (28#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/edge_detector_7.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (29#1) [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.srcs/sources_1/imports/verilog/au_top_0.v:7]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.055 . Memory (MB): peak = 1013.438 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/constraint/custom.xdc]
+Finished Parsing XDC File [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/constraint/custom.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/constraint/custom.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/au_top_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/au_top_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/constraint/custom.xdc]
+Finished Parsing XDC File [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/constraint/custom.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/constraint/custom.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/au_top_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/au_top_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1013.438 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.022 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tftg256-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 1013.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'M_state_q_reg' in module 'final_state_machine_11'
+WARNING: [Synth 8-6040] Register M_state_q_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+WARNING: [Synth 8-6040] Register M_state_q_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+WARNING: [Synth 8-6040] Register M_state_q_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+WARNING: [Synth 8-6040] Register M_state_q_reg_rep driving address of a ROM cannot be packed in BRAM/URAM because of presence of initial value.
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+             START_state |                        000000000 |                        000000000
+       START_TIMER_state |                        000000001 |                        000000001
+      RESET_POINTS_state |                        000000010 |                        000000111
+           RANDSEL_state |                        000000011 |                        000000010
+     FIRST_INTEGER_state |                        000000100 |                        000000011
+    SECOND_INTEGER_state |                        000000101 |                        000000100
+     THIRD_INTEGER_state |                        000000110 |                        000000101
+    FOURTH_INTEGER_state |                        000000111 |                        000000110
+ RESET_FIRST_INPUT_state |                        000001000 |                        000001000
+RESET_SECOND_INPUT_state |                        000001001 |                        000001001
+ RESET_THIRD_INPUT_state |                        000001010 |                        000001010
+RESET_FOURTH_INPUT_state |                        000001011 |                        000001011
+    RESET_FIRST_OP_state |                        000001100 |                        000001100
+   RESET_SECOND_OP_state |                        000001101 |                        000001101
+    RESET_THIRD_OP_state |                        000001110 |                        000001110
+              IDLE_state |                        000001111 |                        000001111
+             INP4A_state |                        000010000 |                        000011110
+       BRANCHINP4A_state |                        000010001 |                        000011111
+           INP4MUL_state |                        000010010 |                        001000111
+           INP4SUB_state |                        000010011 |                        001000110
+           INP4ADD_state |                        000010100 |                        001000101
+             INP4B_state |                        000010101 |                        001001011
+            INP43A_state |                        000010110 |                        001110011
+            INP42A_state |                        000010111 |                        001110010
+            INP41A_state |                        000011000 |                        001110001
+  DECREASE_TIMER4B_state |                        000011001 |                        001100001
+     CHECK_TIMER4B_state |                        000011010 |                        001100010
+    BRANCH_TIMER4B_state |                        000011011 |                        001100011
+CHECK_RESULT_TIMER4B_state |                        000011100 |                        001100100
+BRANCH_RESULT_TIMER4B_state |                        000011101 |                        001100101
+DECREASE_RESULT_TIMER4B_state |                        000011110 |                        001100110
+RESET_RESULT_REG4B_state |                        000011111 |                        001100111
+  DECREASE_TIMER4A_state |                        000100000 |                        000110101
+     CHECK_TIMER4A_state |                        000100001 |                        000110110
+    BRANCH_TIMER4A_state |                        000100010 |                        000110111
+CHECK_RESULT_TIMER4A_state |                        000100011 |                        000111000
+BRANCH_RESULT_TIMER4A_state |                        000100100 |                        000111001
+DECREASE_RESULT_TIMER4A_state |                        000100101 |                        000111010
+RESET_RESULT_REG4A_state |                        000100110 |                        000111011
+             INP3A_state |                        000100111 |                        000011100
+       BRANCHINP3A_state |                        000101000 |                        000011101
+           INP3MUL_state |                        000101001 |                        001000100
+           INP3SUB_state |                        000101010 |                        001000011
+           INP3ADD_state |                        000101011 |                        001000010
+             INP3B_state |                        000101100 |                        001001010
+            INP34A_state |                        000101101 |                        001110000
+      BRANCHINP34A_state |                        000101110 |                        001111001
+          INP34MUL_state |                        000101111 |                        010110101
+          INP34SUB_state |                        000110000 |                        010110100
+          INP34ADD_state |                        000110001 |                        010110011
+            INP34B_state |                        000110010 |                        010111011
+           INP342A_state |                        000110011 |                        011110001
+           INP341A_state |                        000110100 |                        011110000
+ DECREASE_TIMER34B_state |                        000110101 |                        011011111
+    CHECK_TIMER34B_state |                        000110110 |                        011100000
+   BRANCH_TIMER34B_state |                        000110111 |                        011100001
+CHECK_RESULT_TIMER34B_state |                        000111000 |                        011100010
+BRANCH_RESULT_TIMER34B_state |                        000111001 |                        011100011
+DECREASE_RESULT_TIMER34B_state |                        000111010 |                        011100100
+RESET_RESULT_REG34B_state |                        000111011 |                        011100101
+ DECREASE_TIMER34A_state |                        000111100 |                        010011101
+    CHECK_TIMER34A_state |                        000111101 |                        010011110
+   BRANCH_TIMER34A_state |                        000111110 |                        010011111
+CHECK_RESULT_TIMER34A_state |                        000111111 |                        010100000
+BRANCH_RESULT_TIMER34A_state |                        001000000 |                        010100001
+DECREASE_RESULT_TIMER34A_state |                        001000001 |                        010100010
+RESET_RESULT_REG34A_state |                        001000010 |                        010100011
+            INP32A_state |                        001000011 |                        001101111
+            INP31A_state |                        001000100 |                        001101110
+  DECREASE_TIMER3B_state |                        001000101 |                        001011010
+     CHECK_TIMER3B_state |                        001000110 |                        001011011
+    BRANCH_TIMER3B_state |                        001000111 |                        001011100
+CHECK_RESULT_TIMER3B_state |                        001001000 |                        001011101
+BRANCH_RESULT_TIMER3B_state |                        001001001 |                        001011110
+DECREASE_RESULT_TIMER3B_state |                        001001010 |                        001011111
+RESET_RESULT_REG3B_state |                        001001011 |                        001100000
+  DECREASE_TIMER3A_state |                        001001100 |                        000101110
+     CHECK_TIMER3A_state |                        001001101 |                        000101111
+    BRANCH_TIMER3A_state |                        001001110 |                        000110000
+CHECK_RESULT_TIMER3A_state |                        001001111 |                        000110001
+BRANCH_RESULT_TIMER3A_state |                        001010000 |                        000110010
+DECREASE_RESULT_TIMER3A_state |                        001010001 |                        000110011
+RESET_RESULT_REG3A_state |                        001010010 |                        000110100
+             INP2A_state |                        001010011 |                        000011010
+       BRANCHINP2A_state |                        001010100 |                        000011011
+           INP2MUL_state |                        001010101 |                        001000001
+           INP2SUB_state |                        001010110 |                        001000000
+           INP2ADD_state |                        001010111 |                        000111111
+             INP2B_state |                        001011000 |                        001001001
+            INP24A_state |                        001011001 |                        001101101
+      BRANCHINP24A_state |                        001011010 |                        001111000
+          INP24MUL_state |                        001011011 |                        010110010
+          INP24SUB_state |                        001011100 |                        010110001
+          INP24ADD_state |                        001011101 |                        010110000
+            INP24B_state |                        001011110 |                        010111010
+           INP243A_state |                        001011111 |                        011101111
+           INP241A_state |                        001100000 |                        011101110
+ DECREASE_TIMER24B_state |                        001100001 |                        011011000
+    CHECK_TIMER24B_state |                        001100010 |                        011011001
+   BRANCH_TIMER24B_state |                        001100011 |                        011011010
+CHECK_RESULT_TIMER24B_state |                        001100100 |                        011011011
+BRANCH_RESULT_TIMER24B_state |                        001100101 |                        011011100
+DECREASE_RESULT_TIMER24B_state |                        001100110 |                        011011101
+RESET_RESULT_REG24B_state |                        001100111 |                        011011110
+ DECREASE_TIMER24A_state |                        001101000 |                        010010110
+    CHECK_TIMER24A_state |                        001101001 |                        010010111
+   BRANCH_TIMER24A_state |                        001101010 |                        010011000
+CHECK_RESULT_TIMER24A_state |                        001101011 |                        010011001
+BRANCH_RESULT_TIMER24A_state |                        001101100 |                        010011010
+DECREASE_RESULT_TIMER24A_state |                        001101101 |                        010011011
+RESET_RESULT_REG24A_state |                        001101110 |                        010011100
+            INP23A_state |                        001101111 |                        001101100
+      BRANCHINP23A_state |                        001110000 |                        001110111
+          INP23MUL_state |                        001110001 |                        010101111
+          INP23SUB_state |                        001110010 |                        010101110
+          INP23ADD_state |                        001110011 |                        010101101
+            INP23B_state |                        001110100 |                        010111001
+           INP234A_state |                        001110101 |                        011101101
+     BRANCHINP234A_state |                        001110110 |                        011110101
+         INP234MUL_state |                        001110111 |                        100011101
+         INP234SUB_state |                        001111000 |                        100011100
+         INP234ADD_state |                        001111001 |                        100011011
+           INP234B_state |                        001111010 |                        100100001
+           INPXXX1_state |                        001111011 |                        100111110
+DECREASE_TIMER234B_state |                        001111100 |                        100110111
+   CHECK_TIMER234B_state |                        001111101 |                        100111000
+  BRANCH_TIMER234B_state |                        001111110 |                        100111001
+CHECK_RESULT_TIMER234B_state |                        001111111 |                        100111010
+BRANCH_RESULT_TIMER234B_state |                        010000000 |                        100111011
+DECREASE_RESULT_TIMER234B_state |                        010000001 |                        100111100
+RESET_RESULT_REG234B_state |                        010000010 |                        100111101
+DECREASE_TIMER234A_state |                        010000011 |                        100001011
+   CHECK_TIMER234A_state |                        010000100 |                        100001100
+  BRANCH_TIMER234A_state |                        010000101 |                        100001101
+CHECK_RESULT_TIMER234A_state |                        010000110 |                        100001110
+BRANCH_RESULT_TIMER234A_state |                        010000111 |                        100001111
+DECREASE_RESULT_TIMER234A_state |                        010001000 |                        100010000
+RESET_RESULT_REG234A_state |                        010001001 |                        100010001
+           INP231A_state |                        010001010 |                        011101100
+ DECREASE_TIMER23B_state |                        010001011 |                        011010001
+    CHECK_TIMER23B_state |                        010001100 |                        011010010
+   BRANCH_TIMER23B_state |                        010001101 |                        011010011
+CHECK_RESULT_TIMER23B_state |                        010001110 |                        011010100
+BRANCH_RESULT_TIMER23B_state |                        010001111 |                        011010101
+DECREASE_RESULT_TIMER23B_state |                        010010000 |                        011010110
+RESET_RESULT_REG23B_state |                        010010001 |                        011010111
+ DECREASE_TIMER23A_state |                        010010010 |                        010001111
+    CHECK_TIMER23A_state |                        010010011 |                        010010000
+   BRANCH_TIMER23A_state |                        010010100 |                        010010001
+CHECK_RESULT_TIMER23A_state |                        010010101 |                        010010010
+BRANCH_RESULT_TIMER23A_state |                        010010110 |                        010010011
+DECREASE_RESULT_TIMER23A_state |                        010010111 |                        010010100
+RESET_RESULT_REG23A_state |                        010011000 |                        010010101
+            INP21A_state |                        010011001 |                        001101011
+  DECREASE_TIMER2B_state |                        010011010 |                        001010011
+     CHECK_TIMER2B_state |                        010011011 |                        001010100
+    BRANCH_TIMER2B_state |                        010011100 |                        001010101
+CHECK_RESULT_TIMER2B_state |                        010011101 |                        001010110
+BRANCH_RESULT_TIMER2B_state |                        010011110 |                        001010111
+DECREASE_RESULT_TIMER2B_state |                        010011111 |                        001011000
+RESET_RESULT_REG2B_state |                        010100000 |                        001011001
+  DECREASE_TIMER2A_state |                        010100001 |                        000100111
+     CHECK_TIMER2A_state |                        010100010 |                        000101000
+    BRANCH_TIMER2A_state |                        010100011 |                        000101001
+CHECK_RESULT_TIMER2A_state |                        010100100 |                        000101010
+BRANCH_RESULT_TIMER2A_state |                        010100101 |                        000101011
+DECREASE_RESULT_TIMER2A_state |                        010100110 |                        000101100
+RESET_RESULT_REG2A_state |                        010100111 |                        000101101
+             INP1A_state |                        010101000 |                        000011000
+       BRANCHINP1A_state |                        010101001 |                        000011001
+           INP1MUL_state |                        010101010 |                        000111110
+           INP1SUB_state |                        010101011 |                        000111101
+           INP1ADD_state |                        010101100 |                        000111100
+             INP1B_state |                        010101101 |                        001001000
+            INP14A_state |                        010101110 |                        001101010
+      BRANCHINP14A_state |                        010101111 |                        001110110
+          INP14MUL_state |                        010110000 |                        010101100
+          INP14SUB_state |                        010110001 |                        010101011
+          INP14ADD_state |                        010110010 |                        010101010
+            INP14B_state |                        010110011 |                        010111000
+           INP143A_state |                        010110100 |                        011101011
+           INP142A_state |                        010110101 |                        011101010
+ DECREASE_TIMER14B_state |                        010110110 |                        011001010
+    CHECK_TIMER14B_state |                        010110111 |                        011001011
+   BRANCH_TIMER14B_state |                        010111000 |                        011001100
+CHECK_RESULT_TIMER14B_state |                        010111001 |                        011001101
+BRANCH_RESULT_TIMER14B_state |                        010111010 |                        011001110
+DECREASE_RESULT_TIMER14B_state |                        010111011 |                        011001111
+RESET_RESULT_REG14B_state |                        010111100 |                        011010000
+ DECREASE_TIMER14A_state |                        010111101 |                        010001000
+    CHECK_TIMER14A_state |                        010111110 |                        010001001
+   BRANCH_TIMER14A_state |                        010111111 |                        010001010
+CHECK_RESULT_TIMER14A_state |                        011000000 |                        010001011
+BRANCH_RESULT_TIMER14A_state |                        011000001 |                        010001100
+DECREASE_RESULT_TIMER14A_state |                        011000010 |                        010001101
+RESET_RESULT_REG14A_state |                        011000011 |                        010001110
+            INP13A_state |                        011000100 |                        001101001
+      BRANCHINP13A_state |                        011000101 |                        001110101
+          INP13MUL_state |                        011000110 |                        010101001
+          INP13SUB_state |                        011000111 |                        010101000
+          INP13ADD_state |                        011001000 |                        010100111
+            INP13B_state |                        011001001 |                        010110111
+           INP134A_state |                        011001010 |                        011101001
+     BRANCHINP134A_state |                        011001011 |                        011110100
+         INP134MUL_state |                        011001100 |                        100011010
+         INP134SUB_state |                        011001101 |                        100011001
+         INP134ADD_state |                        011001110 |                        100011000
+           INP134B_state |                        011001111 |                        100100000
+           INPXXX2_state |                        011010000 |                        100111111
+DECREASE_TIMER134B_state |                        011010001 |                        100110000
+   CHECK_TIMER134B_state |                        011010010 |                        100110001
+  BRANCH_TIMER134B_state |                        011010011 |                        100110010
+CHECK_RESULT_TIMER134B_state |                        011010100 |                        100110011
+BRANCH_RESULT_TIMER134B_state |                        011010101 |                        100110100
+DECREASE_RESULT_TIMER134B_state |                        011010110 |                        100110101
+RESET_RESULT_REG134B_state |                        011010111 |                        100110110
+DECREASE_TIMER134A_state |                        011011000 |                        100000100
+   CHECK_TIMER134A_state |                        011011001 |                        100000101
+  BRANCH_TIMER134A_state |                        011011010 |                        100000110
+CHECK_RESULT_TIMER134A_state |                        011011011 |                        100000111
+BRANCH_RESULT_TIMER134A_state |                        011011100 |                        100001000
+DECREASE_RESULT_TIMER134A_state |                        011011101 |                        100001001
+RESET_RESULT_REG134A_state |                        011011110 |                        100001010
+           INP132A_state |                        011011111 |                        011101000
+ DECREASE_TIMER13B_state |                        011100000 |                        011000011
+    CHECK_TIMER13B_state |                        011100001 |                        011000100
+   BRANCH_TIMER13B_state |                        011100010 |                        011000101
+CHECK_RESULT_TIMER13B_state |                        011100011 |                        011000110
+BRANCH_RESULT_TIMER13B_state |                        011100100 |                        011000111
+DECREASE_RESULT_TIMER13B_state |                        011100101 |                        011001000
+RESET_RESULT_REG13B_state |                        011100110 |                        011001001
+ DECREASE_TIMER13A_state |                        011100111 |                        010000001
+    CHECK_TIMER13A_state |                        011101000 |                        010000010
+   BRANCH_TIMER13A_state |                        011101001 |                        010000011
+CHECK_RESULT_TIMER13A_state |                        011101010 |                        010000100
+BRANCH_RESULT_TIMER13A_state |                        011101011 |                        010000101
+DECREASE_RESULT_TIMER13A_state |                        011101100 |                        010000110
+RESET_RESULT_REG13A_state |                        011101101 |                        010000111
+            INP12A_state |                        011101110 |                        001101000
+      BRANCHINP12A_state |                        011101111 |                        001110100
+          INP12MUL_state |                        011110000 |                        010100110
+          INP12SUB_state |                        011110001 |                        010100101
+          INP12ADD_state |                        011110010 |                        010100100
+            INP12B_state |                        011110011 |                        010110110
+           INP124A_state |                        011110100 |                        011100111
+     BRANCHINP124A_state |                        011110101 |                        011110011
+         INP124MUL_state |                        011110110 |                        100010111
+         INP124SUB_state |                        011110111 |                        100010110
+         INP124ADD_state |                        011111000 |                        100010101
+           INP124B_state |                        011111001 |                        100011111
+           INPXXX3_state |                        011111010 |                        101000000
+DECREASE_TIMER124B_state |                        011111011 |                        100101001
+   CHECK_TIMER124B_state |                        011111100 |                        100101010
+  BRANCH_TIMER124B_state |                        011111101 |                        100101011
+CHECK_RESULT_TIMER124B_state |                        011111110 |                        100101100
+BRANCH_RESULT_TIMER124B_state |                        011111111 |                        100101101
+DECREASE_RESULT_TIMER124B_state |                        100000000 |                        100101110
+RESET_RESULT_REG124B_state |                        100000001 |                        100101111
+DECREASE_TIMER124A_state |                        100000010 |                        011111101
+   CHECK_TIMER124A_state |                        100000011 |                        011111110
+  BRANCH_TIMER124A_state |                        100000100 |                        011111111
+CHECK_RESULT_TIMER124A_state |                        100000101 |                        100000000
+BRANCH_RESULT_TIMER124A_state |                        100000110 |                        100000001
+DECREASE_RESULT_TIMER124A_state |                        100000111 |                        100000010
+RESET_RESULT_REG124A_state |                        100001000 |                        100000011
+           INP123A_state |                        100001001 |                        011100110
+     BRANCHINP123A_state |                        100001010 |                        011110010
+         INP123MUL_state |                        100001011 |                        100010100
+         INP123SUB_state |                        100001100 |                        100010011
+         INP123ADD_state |                        100001101 |                        100010010
+           INP123B_state |                        100001110 |                        100011110
+           INPXXX4_state |                        100001111 |                        101000001
+           CONFIRM_state |                        100010000 |                        101000010
+              OP1X_state |                        100010001 |                        101001010
+        BRANCHOP1X_state |                        100010010 |                        101001011
+             OP1AB_state |                        100010011 |                        101001100
+             OP12X_state |                        100010100 |                        101001101
+       BRANCHOP12X_state |                        100010101 |                        101001110
+            OP12BC_state |                        100010110 |                        101001111
+            OP123X_state |                        100010111 |                        101010000
+      BRANCHOP123X_state |                        100011000 |                        101010001
+           OP123CD_state |                        100011001 |                        101010010
+             OP13X_state |                        100011010 |                        101010111
+       BRANCHOP13X_state |                        100011011 |                        101011000
+            OP13CD_state |                        100011100 |                        101011001
+              OP2X_state |                        100011101 |                        101100010
+        BRANCHOP2X_state |                        100011110 |                        101100011
+             OP2BC_state |                        100011111 |                        101100100
+             OP23X_state |                        100100000 |                        101100101
+       BRANCHOP23X_state |                        100100001 |                        101100110
+            OP23CD_state |                        100100010 |                        101100111
+             OP231_state |                        100100011 |                        101101000
+       BRANCHOP231_state |                        100100100 |                        101101001
+          OP231AC1_state |                        100100101 |                        101101010
+          OP231AC2_state |                        100100110 |                        101101011
+              OP21_state |                        100100111 |                        101101100
+        BRANCHOP21_state |                        100101000 |                        101101101
+           OP21AC1_state |                        100101001 |                        101101110
+           OP21AC2_state |                        100101010 |                        101101111
+              OP3X_state |                        100101011 |                        101110000
+        BRANCHOP3X_state |                        100101100 |                        101110001
+             OP3CD_state |                        100101101 |                        101110010
+              OP31_state |                        100101110 |                        101110011
+        BRANCHOP31_state |                        100101111 |                        101110100
+           OP31AB1_state |                        100110000 |                        101110101
+           OP31AB2_state |                        100110001 |                        101110110
+             OP132_state |                        100110010 |                        101011010
+       BRANCHOP132_state |                        100110011 |                        101011011
+          OP132BC1_state |                        100110100 |                        101011100
+          OP132BC2_state |                        100110101 |                        101011101
+               OP1_state |                        100110110 |                        101110111
+         BRANCHOP1_state |                        100110111 |                        101111000
+            OP1AB1_state |                        100111000 |                        101111001
+            OP1AB2_state |                        100111001 |                        101111010
+              OP12_state |                        100111010 |                        101011110
+        BRANCHOP12_state |                        100111011 |                        101011111
+           OP12BC1_state |                        100111100 |                        101100000
+           OP12BC2_state |                        100111101 |                        101100001
+             OP123_state |                        100111110 |                        101010011
+       BRANCHOP123_state |                        100111111 |                        101010100
+          OP123CD1_state |                        101000000 |                        101010101
+          OP123CD2_state |                        101000001 |                        101010110
+         CHECK_C24_state |                        101000010 |                        101111011
+  BRANCH_CHECK_C24_state |                        101000011 |                        101111100
+         GREEN_LED_state |                        101000100 |                        101111111
+   GREEN_LED_TIMER_state |                        101000101 |                        110000000
+         ADD_POINT_state |                        101000110 |                        110000001
+           RED_LED_state |                        101000111 |                        101111101
+     RED_LED_TIMER_state |                        101001000 |                        101111110
+DECREASE_TIMER_CONFIRM_state |                        101001001 |                        101000011
+CHECK_TIMER_CONFIRM_state |                        101001010 |                        101000100
+BRANCH_TIMER_CONFIRM_state |                        101001011 |                        101000101
+CHECK_RESULT_TIMER_CONFIRM_state |                        101001100 |                        101000110
+BRANCH_RESULT_TIMER_CONFIRM_state |                        101001101 |                        101000111
+DECREASE_RESULT_TIMER_CONFIRM_state |                        101001110 |                        101001000
+RESET_RESULT_REG_CONFIRM_state |                        101001111 |                        101001001
+DECREASE_TIMER123B_state |                        101010000 |                        100100010
+   CHECK_TIMER123B_state |                        101010001 |                        100100011
+  BRANCH_TIMER123B_state |                        101010010 |                        100100100
+CHECK_RESULT_TIMER123B_state |                        101010011 |                        100100101
+BRANCH_RESULT_TIMER123B_state |                        101010100 |                        100100110
+DECREASE_RESULT_TIMER123B_state |                        101010101 |                        100100111
+RESET_RESULT_REG123B_state |                        101010110 |                        100101000
+DECREASE_TIMER123A_state |                        101010111 |                        011110110
+   CHECK_TIMER123A_state |                        101011000 |                        011110111
+  BRANCH_TIMER123A_state |                        101011001 |                        011111000
+CHECK_RESULT_TIMER123A_state |                        101011010 |                        011111001
+BRANCH_RESULT_TIMER123A_state |                        101011011 |                        011111010
+DECREASE_RESULT_TIMER123A_state |                        101011100 |                        011111011
+RESET_RESULT_REG123A_state |                        101011101 |                        011111100
+ DECREASE_TIMER12B_state |                        101011110 |                        010111100
+    CHECK_TIMER12B_state |                        101011111 |                        010111101
+   BRANCH_TIMER12B_state |                        101100000 |                        010111110
+CHECK_RESULT_TIMER12B_state |                        101100001 |                        010111111
+BRANCH_RESULT_TIMER12B_state |                        101100010 |                        011000000
+DECREASE_RESULT_TIMER12B_state |                        101100011 |                        011000001
+RESET_RESULT_REG12B_state |                        101100100 |                        011000010
+ DECREASE_TIMER12A_state |                        101100101 |                        001111010
+    CHECK_TIMER12A_state |                        101100110 |                        001111011
+   BRANCH_TIMER12A_state |                        101100111 |                        001111100
+CHECK_RESULT_TIMER12A_state |                        101101000 |                        001111101
+BRANCH_RESULT_TIMER12A_state |                        101101001 |                        001111110
+DECREASE_RESULT_TIMER12A_state |                        101101010 |                        001111111
+RESET_RESULT_REG12A_state |                        101101011 |                        010000000
+  DECREASE_TIMER1B_state |                        101101100 |                        001001100
+     CHECK_TIMER1B_state |                        101101101 |                        001001101
+    BRANCH_TIMER1B_state |                        101101110 |                        001001110
+CHECK_RESULT_TIMER1B_state |                        101101111 |                        001001111
+BRANCH_RESULT_TIMER1B_state |                        101110000 |                        001010000
+DECREASE_RESULT_TIMER1B_state |                        101110001 |                        001010001
+RESET_RESULT_REG1B_state |                        101110010 |                        001010010
+  DECREASE_TIMER1A_state |                        101110011 |                        000100000
+     CHECK_TIMER1A_state |                        101110100 |                        000100001
+    BRANCH_TIMER1A_state |                        101110101 |                        000100010
+CHECK_RESULT_TIMER1A_state |                        101110110 |                        000100011
+BRANCH_RESULT_TIMER1A_state |                        101110111 |                        000100100
+DECREASE_RESULT_TIMER1A_state |                        101111000 |                        000100101
+RESET_RESULT_REG1A_state |                        101111001 |                        000100110
+    DECREASE_TIMER_state |                        101111010 |                        000010000
+       CHECK_TIMER_state |                        101111011 |                        000010001
+      BRANCH_TIMER_state |                        101111100 |                        000010010
+CHECK_RESULT_TIMER_state |                        101111101 |                        000010011
+BRANCH_RESULT_TIMER_state |                        101111110 |                        000010100
+DECREASE_RESULT_TIMER_state |                        101111111 |                        000010101
+  RESET_RESULT_REG_state |                        110000000 |                        000010110
+          GAMEOVER_state |                        110000001 |                        000010111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'M_state_q_reg' using encoding 'sequential' in module 'final_state_machine_11'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:56 ; elapsed = 00:00:58 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   18 Bit       Adders := 1     
+	   2 Input   17 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   4 Input     32 Bit         XORs := 1     
+	   2 Input     16 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 1     
+	   3 Input      1 Bit         XORs := 136   
++---Registers : 
+	               32 Bit    Registers := 4     
+	               18 Bit    Registers := 1     
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 17    
+	                4 Bit    Registers := 3     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 9     
+	                1 Bit    Registers := 9     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 1     
+	   2 Input   18 Bit        Muxes := 1     
+	   2 Input   17 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 10    
+	   4 Input   16 Bit        Muxes := 4     
+	 566 Input    9 Bit        Muxes := 1     
+	 386 Input    9 Bit        Muxes := 2     
+	   2 Input    9 Bit        Muxes := 114   
+	   2 Input    8 Bit        Muxes := 135   
+	   2 Input    7 Bit        Muxes := 72    
+	 386 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 27    
+	   2 Input    5 Bit        Muxes := 12    
+	 387 Input    4 Bit        Muxes := 1     
+	 386 Input    4 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 8     
+	   8 Input    4 Bit        Muxes := 2     
+	  11 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 3     
+	 386 Input    2 Bit        Muxes := 3     
+	 387 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 4     
+	  16 Input    1 Bit        Muxes := 16    
+	   2 Input    1 Bit        Muxes := 44    
+	   5 Input    1 Bit        Muxes := 1     
+	 386 Input    1 Bit        Muxes := 5     
+	   4 Input    1 Bit        Muxes := 17    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:51 ; elapsed = 00:02:54 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:59 ; elapsed = 00:03:02 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:27 ; elapsed = 00:03:31 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:31 ; elapsed = 00:03:35 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:36 ; elapsed = 00:03:39 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:36 ; elapsed = 00:03:39 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    61|
+|3     |LUT1   |    31|
+|4     |LUT2   |   267|
+|5     |LUT3   |   138|
+|6     |LUT4   |   169|
+|7     |LUT5   |   219|
+|8     |LUT6   |  1091|
+|9     |MUXF7  |    59|
+|10    |MUXF8  |    16|
+|11    |FDRE   |   649|
+|12    |FDSE   |    57|
+|13    |IBUF   |    12|
+|14    |OBUF   |    77|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:22 ; elapsed = 00:03:35 . Memory (MB): peak = 1326.773 ; gain = 313.336
+Synthesis Optimization Complete : Time (s): cpu = 00:03:36 ; elapsed = 00:03:40 . Memory (MB): peak = 1326.773 ; gain = 313.336
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.072 . Memory (MB): peak = 1326.773 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 136 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1326.773 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+96 Infos, 12 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:03:43 ; elapsed = 00:03:50 . Memory (MB): peak = 1326.773 ; gain = 313.336
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Yi Xian/Desktop/50.002 Computational Structures/1D/24 Game/work/vivado/24 Game/24 Game.runs/synth_1/au_top_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Dec  1 15:57:58 2020...

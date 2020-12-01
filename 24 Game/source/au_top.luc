@@ -1,0 +1,184 @@
+module au_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+    
+    output integer_seg [7],      
+    output integer_sel [4],
+    
+    output timer_seg[7],
+    output timer_sel[4],
+    
+    output score_seg[7],
+    
+    //NUmber inputs
+    output input_one_seg[7],
+    output input_two_seg[7],
+    output input_three_seg[7],
+    output input_four_seg[7],
+    
+    //Operation inputs
+    output first_op_led[3],
+    output second_op_led[3],
+    output third_op_led[3],
+    
+    output results_led[2],
+    
+    input button1,
+    input button2,
+    input button3,
+    input button4,
+    
+    input plus_button,
+    input sub_button,
+    input mul_button,
+    
+    input confirm_button,
+    input reset_button
+  ) {
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+    .rst(rst) {
+      game_beta beta;
+      
+      two_seven_seg timer;
+      multi_dec_ctr timer_dec;
+      
+      four_seven_seg multi_integer;
+    }
+    
+    button_conditioner btn_cond_button1;
+    button_conditioner btn_cond_button2;
+    button_conditioner btn_cond_button3;
+    button_conditioner btn_cond_button4;
+    
+    button_conditioner btn_cond_plus_button;
+    button_conditioner btn_cond_sub_button;
+    button_conditioner btn_cond_mul_button;
+    
+    button_conditioner btn_cond_confirm_button;
+    button_conditioner btn_cond_reset_button;
+    
+    edge_detector edg_dtc_button1;
+    edge_detector edg_dtc_button2;
+    edge_detector edg_dtc_button3;
+    edge_detector edg_dtc_button4;
+    
+    edge_detector edg_dtc_plus_button;
+    edge_detector edg_dtc_sub_button;
+    edge_detector edg_dtc_mul_button;
+    
+    edge_detector edg_dtc_reset_button;
+    edge_detector edg_dtc_confirm_button;
+  }
+  
+  seven_seg score;
+  seven_seg_no_zero input_one;
+  seven_seg_no_zero input_two;
+  seven_seg_no_zero input_three;
+  seven_seg_no_zero input_four;
+  
+  always {
+    reset_cond.in = ~rst_n; // input raw inverted reset signal
+    rst = reset_cond.out;   // conditioned reset
+    
+    usb_tx = usb_rx;        // loop serial port
+    
+    led = 8h00;             // turn LEDs off
+    
+    //BETA INPUTS
+    btn_cond_button1.in = button1;
+    edg_dtc_button1.in = btn_cond_button1.out;
+    beta.button1 = edg_dtc_button1.out;
+    btn_cond_button2.in = button2;
+    edg_dtc_button2.in = btn_cond_button2.out;
+    beta.button2 = edg_dtc_button2.out;
+    btn_cond_button3.in = button3;
+    edg_dtc_button3.in = btn_cond_button3.out;
+    beta.button3 = edg_dtc_button3.out;
+    btn_cond_button4.in = button4;
+    edg_dtc_button4.in = btn_cond_button4.out;
+    beta.button4 = edg_dtc_button4.out;
+    
+    btn_cond_plus_button.in = plus_button;
+    edg_dtc_plus_button.in = btn_cond_plus_button.out;
+    beta.plus_button = edg_dtc_plus_button.out;
+    btn_cond_sub_button.in = sub_button;
+    edg_dtc_sub_button.in = btn_cond_sub_button.out;
+    beta.sub_button = edg_dtc_sub_button.out;
+    btn_cond_mul_button.in = mul_button;
+    edg_dtc_mul_button.in = btn_cond_mul_button.out;
+    beta.mul_button = edg_dtc_mul_button.out;
+    
+    btn_cond_confirm_button.in = confirm_button;
+    edg_dtc_confirm_button.in = btn_cond_confirm_button.out;
+    beta.confirm_button = edg_dtc_confirm_button.out;
+    btn_cond_reset_button.in = reset_button;
+    edg_dtc_reset_button.in = btn_cond_reset_button.out;
+    beta.reset_button = edg_dtc_reset_button.out;
+    
+    //timer 7-Segment
+    timer_dec.dec = beta.timer_decrease;
+    timer_dec.set_sixty = beta.timer_set_sixty;
+    timer.values = timer_dec.digits[1:0];
+    
+    timer_seg = timer.seg;
+    timer_sel = ~timer.sel[1:0];
+    
+    //Integers 7-Segment
+    multi_integer.values[0] = beta.integers[3:0];
+    multi_integer.values[1] = beta.integers[7:4];
+    multi_integer.values[2] = beta.integers[11:8];
+    multi_integer.values[3] = beta.integers[15:12];
+    
+    integer_seg = multi_integer.seg;
+    integer_sel = ~multi_integer.sel;
+    
+    //Score 7-Segment
+    score.char = beta.score;
+    score_seg = score.segs;
+    
+    //Number 7-Segment
+    input_one.char = beta.intinp[3:0];
+    input_one_seg = input_one.segs;
+    
+    input_two.char = beta.intinp[7:4];
+    input_two_seg = input_two.segs;
+    
+    input_three.char = beta.intinp[11:8];
+    input_three_seg = input_three.segs;
+    
+    input_four.char = beta.intinp[15:12];
+    input_four_seg = input_four.segs;
+    
+    //Operation LEDs
+    case(beta.opinp[1:0]){
+      b01: first_op_led = 001;
+      b10: first_op_led = 010;
+      b11: first_op_led = 100;
+      default: first_op_led = 000;
+    }
+    case (beta.opinp[3:2]) {
+      b01: second_op_led = 001;
+      b10: second_op_led = 010;
+      b11: second_op_led = 100;
+      default: second_op_led = 000;
+    }
+    case (beta.opinp[5:4]) {
+      b01: third_op_led = 001;
+      b10: third_op_led = 010;
+      b11: third_op_led = 100;
+      default: third_op_led = 000;
+    }
+    
+    //Results LED
+    results_led = beta.results;
+  }
+}

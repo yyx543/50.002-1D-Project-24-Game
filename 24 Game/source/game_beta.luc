@@ -1,0 +1,124 @@
+module game_beta (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input confirm_button,
+    input reset_button,
+    
+    input button1,
+    input button2,
+    input button3,
+    input button4,
+    
+    input plus_button,
+    input sub_button,
+    input mul_button,
+    
+    output timer_decrease,
+    output timer_set_sixty,
+    
+    output integers[16],        // 4 integers
+    
+    output results[2],          // round results
+    output score[4],            // score
+    
+    output intinp[16],          // integer inputs
+    
+    output opinp[6]             // operation inputs
+  ) {
+
+  .clk(clk) {
+    .rst(rst) {
+      game_regfile regfile;
+      final_state_machine sm;
+      dff one_second[27];
+      
+      input_integers int_gen;
+    }
+  }
+  
+  game_alu alu;
+  
+  always {
+    //one second
+    if (one_second.q >= 100000000) {
+      sm.st = 1;
+      one_second.d = 27b0;
+    }
+    else {
+      sm.st = 0;
+      one_second.d = one_second.q + 1;
+    }
+    
+    //alufn input
+    alu.alufn = sm.alufn;
+    
+    //asel
+    case (sm.asel) {
+      b00: alu.a = regfile.read_data_1;
+      b01: alu.a = 1;
+      b10: alu.a = 2;
+      b11: alu.a = 3;
+      default: alu.a = regfile.read_data_1;
+    }
+    
+    //bsel
+    case (sm.bsel) {
+      b00: alu.b = regfile.read_data_2;
+      b01: alu.b = 24;
+      b10: alu.b = 0;
+      b11: alu.b = 1;
+      default: alu.b = regfile.read_data_2;
+    }
+    
+    //wdsel
+    case (sm.wdsel) {
+      b00: regfile.write_data = alu.alu;
+      b01: regfile.write_data = 0;
+      b10: regfile.write_data = 60;
+      b11: regfile.write_data = int_gen.int_input;
+      default: regfile.write_data = alu.alu;
+    }
+    
+    //REGFILE inputs
+    regfile.write_enable = sm.we;
+    regfile.read_address_1 = sm.ra;
+    regfile.read_address_2 = sm.rb;
+    regfile.write_address = sm.rc;
+    
+    //REGFILE outputs
+//    score = regfile.score;
+    
+    //FSM inputs
+    sm.rbdata = regfile.read_data_2;
+    sm.confirm_button = confirm_button;
+    sm.reset_button = reset_button;
+    
+    sm.button1 = button1;
+    sm.button2 = button2;
+    sm.button3 = button3;
+    sm.button4 = button4;
+    
+    sm.plus_button = plus_button;
+    sm.sub_button = sub_button;
+    sm.mul_button = mul_button;
+    
+    //LEDs and 7 seg outputs
+    integers = regfile.integers;
+    
+    results = regfile.results;
+    score = regfile.score;
+    
+    intinp = regfile.intinp;
+    
+    opinp = regfile.opinp;
+    
+    //timer 7 seg
+    timer_decrease = sm.timer_decrease;
+    timer_set_sixty = sm.timer_set_sixty;
+    
+    //integer gen inputs
+    int_gen.randsel = sm.randsel;
+    int_gen.numsel = sm.numsel;
+  }
+}

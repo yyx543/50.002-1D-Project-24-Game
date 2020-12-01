@@ -1,0 +1,116 @@
+//ALCHITRY
+pin clk CLOCK;
+clock clk 100MHz;
+
+pin rst_n RESET;
+
+pin led[0] LED0;
+pin led[1] LED1;
+pin led[2] LED2;
+pin led[3] LED3;
+pin led[4] LED4;
+pin led[5] LED5;
+pin led[6] LED6;
+pin led[7] LED7;
+
+// flip the Tx/Rx lines
+pin usb_rx USB_TX;
+pin usb_tx USB_RX;
+
+//BUTTON INPUTS
+pin button1 C24 pulldown;
+pin button2 C18 pulldown;
+pin button3 C9 pulldown;
+pin button4 C3 pulldown;
+
+pin plus_button C21 pulldown;
+pin sub_button C12 pulldown;
+pin mul_button C6 pulldown;
+
+pin confirm_button D9 pulldown;
+pin reset_button D8 pulldown;
+
+//Integer 7-Segment
+pin integer_sel[0] A42;
+pin integer_sel[1] B27;
+pin integer_sel[2] B30;
+pin integer_sel[3] B34;
+
+pin integer_seg[0] A45;
+pin integer_seg[1] B33;
+pin integer_seg[2] B28;
+pin integer_seg[3] A46;
+pin integer_seg[4] A43;
+pin integer_seg[5] A48;
+pin integer_seg[6] B31;
+
+//Timer 7-Segment
+pin timer_sel[0] A36;
+pin timer_sel[1] A33;
+
+pin timer_seg[0] A27;
+pin timer_seg[1] A30;
+pin timer_seg[2] A28;
+pin timer_seg[3] A37;
+pin timer_seg[4] A34;
+pin timer_seg[5] A39;
+pin timer_seg[6] A40;
+
+//Opertaions LED
+pin first_op_led[0] A17;
+pin first_op_led[1] C34;
+pin first_op_led[2] C33;
+
+pin second_op_led[0] A8;
+pin second_op_led[1] C43;
+pin second_op_led[2] C42;
+
+pin third_op_led[0] B37;
+pin third_op_led[1] B15;
+pin third_op_led[2] B14;
+
+//Input 7-Segment
+pin input_one_seg[0] A23;
+pin input_one_seg[1] A24;
+pin input_one_seg[2] A21;
+pin input_one_seg[3] A20;
+pin input_one_seg[4] C31;
+pin input_one_seg[5] C28;
+pin input_one_seg[6] C27;
+
+pin input_two_seg[0] A14;
+pin input_two_seg[1] A15;
+pin input_two_seg[2] A12;
+pin input_two_seg[3] A11;
+pin input_two_seg[4] C40;
+pin input_two_seg[5] C37;
+pin input_two_seg[6] C36;
+
+pin input_three_seg[0] A5;
+pin input_three_seg[1] A6;
+pin input_three_seg[2] A3;
+pin input_three_seg[3] A2;
+pin input_three_seg[4] C49;
+pin input_three_seg[5] C46;
+pin input_three_seg[6] C45;
+
+pin input_four_seg[0] B6;
+pin input_four_seg[1] B3;
+pin input_four_seg[2] B5;
+pin input_four_seg[3] B8;
+pin input_four_seg[4] B11;
+pin input_four_seg[5] B9;
+pin input_four_seg[6] B12;
+
+//Score 7-Segment
+pin score_seg[0] B45;
+pin score_seg[1] B48;
+pin score_seg[2] B46;
+pin score_seg[3] B43;
+pin score_seg[4] B40;
+pin score_seg[5] B42;
+pin score_seg[6] B39;
+
+//Result LEDs
+pin results_led[0] C11;
+pin results_led[1] C17;

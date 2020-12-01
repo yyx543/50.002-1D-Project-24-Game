@@ -1,0 +1,34 @@
+module decimal_counter (
+    input clk,      // clock
+    input rst,      // reset
+    
+    input dec,      // decrement the counter
+    
+    input set[4],      // set specific value
+    
+    output uvf,     // counter underflowed
+    output value[4] // current value
+  ) {
+ 
+  .clk(clk), .rst(rst) {
+    dff val[4];     // value storage
+  }
+ 
+  always {
+  
+    if (set<10) {
+      val.d = set;
+    }
+    
+    value = val.q;           // output the value
+ 
+    uvf = val.q == 0 && dec; // if min value and decrementing, underflow!
+    
+    if (dec) {               // should minus 1
+      if (val.q == 0)        // if min value
+        val.d = 9;           // reset to 9
+      else                   // otherwise
+        val.d = val.q - 1;   // minus one
+    }
+  }
+}
